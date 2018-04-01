@@ -6,7 +6,7 @@ import { Route } from 'react-router-dom'
 
 import Header from './component/Header'
 import Intro from './container/Intro'
-import Nav from './Nav'
+import Nav from './component/Nav'
 // import pages
 
 const App = () => (
