@@ -3,7 +3,11 @@
 import Immutable from 'immutable'
 import type { fromJS as Immut } from 'immutable'
 
-import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL } from '../actions/user'
+import {
+  REGISTER_USER_REQUEST,
+  REGISTER_USER_SUCCESS,
+  REGISTER_USER_FAIL,
+} from '../constants/actionTypes'
 
 const initialState = Immutable.fromJS({ user: '' })
 

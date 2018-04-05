@@ -6,14 +6,18 @@ import Helmet from 'react-helmet'
 import { Provider } from 'react-redux'
 import { StaticRouter } from 'react-router'
 
+import initStore from './init-store'
 import App from './../shared/App'
 import { APP_CONTAINER_CLASS, STATIC_PATH, WDS_PORT } from '../shared/config'
 import { isProd } from '../shared/util'
 
 const renderApp = (location: string, plainPartialState: ?Object, routerContext: ?Object = {}) => {
-  const appHtml = ReactDOMServer.renderToString(<StaticRouter location={location} context={routerContext}>
-    <App />
-  </StaticRouter>)
+  const store = initStore(plainPartialState)
+  const appHtml = ReactDOMServer.renderToString(<Provider store={store}>
+    <StaticRouter location={location} context={routerContext}>
+      <App />
+    </StaticRouter>
+  </Provider>)
   const head = Helmet.rewind()
 
   return `<!doctype html>
@@ -27,6 +31,9 @@ const renderApp = (location: string, plainPartialState: ?Object, routerContext: 
         </head>
         <body>
           <div class="${APP_CONTAINER_CLASS}">${appHtml}</div>
+          <script>
+            window.__PRELOADED_STATE__ = ${JSON.stringify(store.getState())}
+          </script>
           <script src="${
   isProd ? STATIC_PATH : `http://localhost:${WDS_PORT}/dist`
 }/js/bundle.js"></script>

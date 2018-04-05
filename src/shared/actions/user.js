@@ -2,6 +2,7 @@
 
 import axios from 'axios'
 import { createAction } from 'redux-actions'
+import { browserHistory } from 'react-router'
 import * as types from '../constants/actionTypes'
 
 import { USER_REGISTER_ROUTE, USER_LOGIN_ROUTE, USER_LOGOUT_ROUTE } from '../routes'
@@ -29,7 +30,12 @@ export const registerUser = (data: Object) => (dispatch: Function) => {
   dispatch(registerUserRequest())
   return axios
     .post(USER_REGISTER_ROUTE, data)
-    .then(user => dispatch(registerUserSuccess))
+    .then((user) => {
+      dispatch(registerUserSuccess)
+      dispatch(loginUserSuccess)
+
+      browserHistory.push('/lobby')
+    })
     .catch(err => dispatch(registerUserFail))
 }
 
@@ -41,10 +47,10 @@ export const loginUser = (data: Object) => (dispatch: Function) => {
     .catch(err => dispatch(loginUserFail))
 }
 
-export const logoutUser = (data: Object) => (dispatch: Function) => {
+export const logoutUser = () => (dispatch: Function) => {
   dispatch(logoutUserRequest())
   return axios
-    .post(USER_LOGOUT_ROUTE, data)
-    .then(user => dispatch(logoutUserSuccess))
+    .post(USER_LOGOUT_ROUTE)
+    .then(() => dispatch(logoutUserSuccess))
     .catch(err => dispatch(logoutUserFail))
 }

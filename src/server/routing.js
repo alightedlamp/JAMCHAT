@@ -5,6 +5,8 @@ import {
   aboutPage,
   lobbyPage,
   jamPage,
+  loginPage,
+  registerPage,
   userProfilePage,
   userRegister,
   userLogin,
@@ -15,6 +17,8 @@ import {
   HOME_PAGE_ROUTE,
   ABOUT_PAGE_ROUTE,
   LOBBY_PAGE_ROUTE,
+  LOGIN_PAGE_ROUTE,
+  REGISTER_PAGE_ROUTE,
   USER_REGISTER_ROUTE,
   USER_LOGIN_ROUTE,
   USER_LOGOUT_ROUTE,
@@ -37,6 +41,14 @@ export default (app: Object) => {
     res.send(renderApp(req.url, lobbyPage()))
   })
 
+  app.get(LOGIN_PAGE_ROUTE, (req, res) => {
+    res.send(renderApp(req.url, loginPage()))
+  })
+
+  app.get(REGISTER_PAGE_ROUTE, (req, res) => {
+    res.send(renderApp(req.url, registerPage()))
+  })
+
   app.get(jamPageRoute(), (req, res) => {
     res.send(renderApp(req.url, jamPage(req.params.id)))
   })
@@ -45,7 +57,10 @@ export default (app: Object) => {
     res.send(renderApp(req.url, userProfilePage(req.params.id)))
   })
 
-  app.post(USER_REGISTER_ROUTE, userRegister)
+  app.post(USER_REGISTER_ROUTE, userRegister, (req, res) => {
+    console.log('redirecting home')
+    res.redirect('/lobby')
+  })
   app.post(USER_LOGIN_ROUTE, userLogin)
   app.post(USER_LOGOUT_ROUTE, userLogout)
 

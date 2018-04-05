@@ -11,15 +11,19 @@ import User from './models/user'
 export const homePage = () => null
 export const aboutPage = () => null
 export const lobbyPage = () => null
+export const loginPage = () => null
+export const registerPage = () => null
 
 export const jamPage = (id: string) => null
 
 export const userProfilePage = (id: string) => null
 
-export const userRegister = (req: Object, res: Object) =>
+export const userRegister = (req: Object, res: Object) => {
   User.register(new User({ username: req.body.username }), req.body.password)
-    .then(() => passport.authenticate('local')(req, res))
+    .then(() =>
+      passport.authenticate('local', { successRedirect: '/lobby', failureRedirect: '/register' }))
     .catch(err => res.status(500).json({ error: err.message }))
+}
 
 export const userLogin = () => passport.authenticate('local')
 
