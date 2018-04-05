@@ -12,10 +12,10 @@ const mapStateToProps = () => ({
 const mapDispatchToProps = dispatch => ({
   handleSubmit: (e) => {
     e.preventDefault()
-    const data = {}
-    data.username = e.target.username.value
-    data.password = e.target.password.value
-    dispatch(registerUser(data))
+    dispatch(registerUser({
+      username: e.target.username.value,
+      password: e.target.password.value,
+    }))
   },
 })
 

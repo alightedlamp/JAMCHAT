@@ -57,16 +57,9 @@ export default (app: Object) => {
     res.send(renderApp(req.url, userProfilePage(req.params.id)))
   })
 
-  app.post(USER_REGISTER_ROUTE, userRegister, (req, res) => {
-    console.log('redirecting home')
-    res.redirect('/lobby')
-  })
+  app.post(USER_REGISTER_ROUTE, userRegister, (req, res) => res.json(req.user))
   app.post(USER_LOGIN_ROUTE, userLogin)
   app.post(USER_LOGOUT_ROUTE, userLogout)
-
-  app.get('/500', () => {
-    throw Error('Fake Internal Server Error')
-  })
 
   app.get('*', (req, res) => {
     res.status(404).send(renderApp(req.url))

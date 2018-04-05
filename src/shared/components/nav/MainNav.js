@@ -24,17 +24,24 @@ const LinkList = styled.ul`
   list-style-type: none;
 `
 
-const MainNav = (user) => {
+const MenuButton = styled.button`
+  padding: 5px;
+  border: 3px solid blue;
+  background: #17a589;
+  color: white;
+`
+
+const MainNav = (user: Object) => {
   const isLoggedIn = user.authenticated
   const loginSection = isLoggedIn ? (
     <LogoutButton />
   ) : (
     <Fragment>
       <NavLink to={LOGIN_PAGE_ROUTE} exact>
-        <button>Login</button>
+        <MenuButton>Login</MenuButton>
       </NavLink>
       <NavLink to={REGISTER_PAGE_ROUTE} exact>
-        <button>Register</button>
+        <MenuButton>Register</MenuButton>
       </NavLink>
     </Fragment>
   )

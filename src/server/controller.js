@@ -18,10 +18,9 @@ export const jamPage = (id: string) => null
 
 export const userProfilePage = (id: string) => null
 
-export const userRegister = (req: Object, res: Object) => {
+export const userRegister = (req: Object, res: Object, next: Function) => {
   User.register(new User({ username: req.body.username }), req.body.password)
-    .then(() =>
-      passport.authenticate('local', { successRedirect: '/lobby', failureRedirect: '/register' }))
+    .then(() => passport.authenticate('local')(req, res, next))
     .catch(err => res.status(500).json({ error: err.message }))
 }
 
