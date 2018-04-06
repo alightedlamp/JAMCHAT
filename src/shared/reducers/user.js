@@ -30,7 +30,12 @@ const userReducer = (state: Immut = initialState, action: { type: string, payloa
     case LOGIN_USER_REQUEST:
       return { ...state, isAuthenticating: true }
     case LOGIN_USER_SUCCESS:
-      return { ...state, ...action.payload }
+      return {
+        ...state,
+        isAuthenticating: false,
+        authenticated: true,
+        username: action.payload.username,
+      }
     case LOGIN_USER_FAIL:
       return { ...state, errorAuthenticating: { ...action.payload } }
     default:
