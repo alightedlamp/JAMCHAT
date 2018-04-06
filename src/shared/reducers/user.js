@@ -12,14 +12,19 @@ import {
   LOGIN_USER_FAIL,
 } from '../constants/actionTypes'
 
-const initialState = Immutable.fromJS({ user: { authenticated: false } })
+const initialState = Immutable.fromJS({ authenticated: false })
 
-const userRegister = (state: Immut = initialState, action: { type: string, payload: any }) => {
+const userReducer = (state: Immut = initialState, action: { type: string, payload: any }) => {
   switch (action.type) {
     case REGISTER_USER_REQUEST:
       return { ...state, isAuthenticating: true }
     case REGISTER_USER_SUCCESS:
-      return { ...state, ...action.payload }
+      return {
+        ...state,
+        isAuthenticating: false,
+        authenticated: true,
+        username: action.payload.username,
+      }
     case REGISTER_USER_FAIL:
       return { ...state, errorAuthenticating: { ...action.payload } }
     case LOGIN_USER_REQUEST:
@@ -33,4 +38,4 @@ const userRegister = (state: Immut = initialState, action: { type: string, paylo
   }
 }
 
-export default userRegister
+export default userReducer
