@@ -11,7 +11,8 @@ import MainNav from './nav/MainNav'
 
 const AppBar = styled.header`
   position: fixed;
-  display: flex;
+  display: grid;
+  grid-template-columns: 10% 80%;
   top: 0;
   left: 0;
   background-color: tomato;

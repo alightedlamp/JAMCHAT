@@ -7,9 +7,6 @@ import * as types from '../constants/actionTypes'
 
 import { USER_REGISTER_ROUTE, USER_LOGIN_ROUTE, USER_LOGOUT_ROUTE } from '../routes'
 
-export const validateUsername = createAction(types.VALIDATE_USERNAME)
-export const validatePassword = createAction(types.VALIDATE_PASSWORD)
-
 export const registerUserRequest = createAction(types.REGISTER_USER_REQUEST)
 export const registerUserSuccess = createAction(types.REGISTER_USER_SUCCESS)
 export const registerUserFail = createAction(types.REGISTER_USER_FAIL)
@@ -30,26 +27,32 @@ export const registerUser = (data: Object) => (dispatch: Function) => {
   dispatch(registerUserRequest())
   return axios
     .post(USER_REGISTER_ROUTE, data)
-    .then((user) => {
-      dispatch(registerUserSuccess)
-      dispatch(loginUserSuccess)
-      dispatch(push('/lobby'))
-    })
-    .catch(err => dispatch(registerUserFail))
+    .then(res =>
+      dispatch(registerUserSuccess({
+        username: res.data.username,
+        authenticated: true,
+      })))
+    .then(() => dispatch(push('/lobby')))
+    .catch(err => dispatch(registerUserFail(err)))
 }
 
 export const loginUser = (data: Object) => (dispatch: Function) => {
   dispatch(loginUserRequest())
   return axios
     .post(USER_LOGIN_ROUTE, data)
-    .then(user => dispatch(loginUserSuccess))
-    .catch(err => dispatch(loginUserFail))
+    .then(res =>
+      dispatch(loginUserSuccess({
+        username: res.data.username,
+        authenticated: true,
+      })))
+    .then(() => dispatch(push('/lobby')))
+    .catch(err => dispatch(loginUserFail(err)))
 }
 
 export const logoutUser = () => (dispatch: Function) => {
   dispatch(logoutUserRequest())
   return axios
     .post(USER_LOGOUT_ROUTE)
-    .then(() => dispatch(logoutUserSuccess))
-    .catch(err => dispatch(logoutUserFail))
+    .then(() => dispatch(logoutUserSuccess()))
+    .catch(err => dispatch(logoutUserFail(err)))
 }

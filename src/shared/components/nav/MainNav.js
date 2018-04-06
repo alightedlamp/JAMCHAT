@@ -15,20 +15,25 @@ import {
 } from '../../routes'
 
 const NavContainer = styled.nav`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-areas: 'pagesSubNav . loginSubNav';
+  grid-template-columns: 15% auto 10%;
 `
 
 const LinkList = styled.ul`
+  grid-area: ${props => props.gridAreaName};
   display: flex;
   list-style-type: none;
 `
 
 const MenuButton = styled.button`
-  padding: 5px;
+  padding: 7px;
+  margin: 0 10px;
+  width: 100px;
+  font-size: 1.15em;
   border: 3px solid blue;
-  background: #17a589;
-  color: white;
+  background: lightblue;
+  color: blue;
 `
 
 const MainNav = (user: Object) => {
@@ -47,7 +52,7 @@ const MainNav = (user: Object) => {
   )
   return (
     <NavContainer>
-      <LinkList>
+      <LinkList gridAreaName="pagesSubNav">
         {[
           { route: HOME_PAGE_ROUTE, label: 'Home' },
           { route: ABOUT_PAGE_ROUTE, label: 'About' },
@@ -60,7 +65,7 @@ const MainNav = (user: Object) => {
           </li>
         ))}
       </LinkList>
-      <LinkList>{loginSection}</LinkList>
+      <LinkList gridAreaName="loginSubNav">{loginSection}</LinkList>
     </NavContainer>
   )
 }
