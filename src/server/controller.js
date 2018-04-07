@@ -24,9 +24,10 @@ export const userRegister = (req: Object, res: Object, next: Function) => {
     .catch(err => res.status(500).json({ error: err.message }))
 }
 
-export const userLogin = () => passport.authenticate('local')
+export const userLogin = (req: Object, res: Object, next: Function) =>
+  passport.authenticate('local')(req, res, next)
 
 export const userLogout = (req: Object, res: Object) => {
   req.logout()
-  res.redirect('/')
+  res.sendStatus(200)
 }

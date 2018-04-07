@@ -57,8 +57,9 @@ export default (app: Object) => {
     res.send(renderApp(req.url, userProfilePage(req.params.id)))
   })
 
-  app.post(USER_REGISTER_ROUTE, userRegister, (req, res) => res.json(req.user))
-  app.post(USER_LOGIN_ROUTE, userLogin)
+  app.post(USER_REGISTER_ROUTE, userRegister, (req, res) =>
+    res.json({ username: req.user.username }))
+  app.post(USER_LOGIN_ROUTE, userLogin, (req, res) => res.json({ username: req.user.username }))
   app.post(USER_LOGOUT_ROUTE, userLogout)
 
   app.get('*', (req, res) => {

@@ -54,5 +54,6 @@ export const logoutUser = () => (dispatch: Function) => {
   return axios
     .post(USER_LOGOUT_ROUTE)
     .then(() => dispatch(logoutUserSuccess()))
+    .then(() => dispatch(push('/')))
     .catch(err => dispatch(logoutUserFail(err)))
 }

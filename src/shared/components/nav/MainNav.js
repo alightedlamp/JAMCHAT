@@ -17,13 +17,19 @@ import {
 const NavContainer = styled.nav`
   display: grid;
   grid-template-areas: 'pagesSubNav . loginSubNav';
-  grid-template-columns: 15% auto 10%;
+  grid-template-columns: 20% auto 25%;
 `
 
 const LinkList = styled.ul`
   grid-area: ${props => props.gridAreaName};
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   list-style-type: none;
+`
+
+const NavUser = styled.span`
+  font-size: 1.25em;
 `
 
 const MenuButton = styled.button`
@@ -34,12 +40,22 @@ const MenuButton = styled.button`
   border: 3px solid blue;
   background: lightblue;
   color: blue;
+
+  &:hover {
+    background: blue;
+    color: lightblue;
+    transition: 0.5s;
+  }
 `
 
-const MainNav = (user: Object) => {
-  const isLoggedIn = user.authenticated
+const MainNav = (props: Object) => {
+  console.log(props.user)
+  const isLoggedIn = props.user.authenticated
   const loginSection = isLoggedIn ? (
-    <LogoutButton />
+    <Fragment>
+      <NavUser>{props.user.username}</NavUser>
+      <LogoutButton />
+    </Fragment>
   ) : (
     <Fragment>
       <NavLink to={LOGIN_PAGE_ROUTE} exact>
