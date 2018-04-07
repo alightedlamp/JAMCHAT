@@ -32,17 +32,23 @@ export const userLogout = (req: Object, res: Object) => {
   res.sendStatus(200)
 }
 
-const createRoom = (req) => {
-  console.log('[controller] creating new room')
+export const createRoom = (req, res) =>
   Jam.create({
-    name: req.data.name,
+    created_by: req.user._id,
+    title: req.body.title,
+    bpm: req.body.bpm,
   })
-}
 
-const joinRoom = req => Jam.update({ id: req.id }, { $push: { users: req.username } })
+export const joinRoom = (req, res) =>
+  Jam.findByIdAndUpdate(
+    { _id: req.params.id },
+    // Increment total contributors here
+    { $push: { users: { username: req.user.username, id: req.user._id } } },
+    { new: true },
+  ).exec()
 
-const leaveRoom = req =>
-  Jam.findOne({ id: req.room_id }, (err, doc) => {
+export const leaveRoom = req =>
+  Jam.findOne({ _id: req.room_id }, (err, doc) => {
     if (err) {
       return err
     }
@@ -51,7 +57,8 @@ const leaveRoom = req =>
     const { users } = doc
     const currentUserIdx = users.indexOf(req.user_id)
     users.splice(currentUserIdx, 1)
-    users.save((err) => {
+
+    return users.save((err) => {
       if (err) {
         return err
       }
@@ -59,16 +66,21 @@ const leaveRoom = req =>
     })
   }) // Remove the user from the room
 
-export const handleRoomAction = (req: Object, res: Object) => {
-  console.log(req.body.action)
+export const handleRoomAction = (req: Object, res: Object, next: Function) => {
   switch (req.body.action) {
     case 'create':
-      return createRoom(req)
+      return createRoom(req, res).then((doc) => {
+        res.locals.doc = doc
+        next()
+      })
     case 'join':
-      return joinRoom(req)
+      return joinRoom(req, res).then((doc) => {
+        res.locals.doc = doc
+        next()
+      })
     case 'leave':
-      return leaveRoom(req)
+      return leaveRoom(req, res)
     default:
-      return new Error('An error occurred in entering or leaving the chat.')
+      return new Error(`Sorry, an error occurred when attempting to ${req.body.action} room.`)
   }
 }

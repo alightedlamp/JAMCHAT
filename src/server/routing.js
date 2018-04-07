@@ -28,24 +28,25 @@ export default (app: Object) => {
     res.send(renderApp(req.url, controller.registerPage()))
   })
 
-  app.get(routes.jamPageRoute(), (req, res) => {
-    res.send(renderApp(req.url, controller.jamPage(req.params.id)))
-  })
+  app.get(routes.jamPageRoute(), (req, res) =>
+    controller
+      .joinRoom(req, res)
+      .then(() => res.send(renderApp(req.url, controller.jamPage(req.params.id)))))
 
   app.get(routes.userProfilePageRoute(), (req, res) => {
     res.send(renderApp(req.url, controller.userProfilePage(req.params.id)))
   })
 
   // POST routes
-  app.post(routes.jamPageRoute(), controller.handleRoomAction)
+  app.post(routes.jamPageRoute(), controller.handleRoomAction, (req, res) =>
+    res.json(res.locals.doc))
   app.post(routes.USER_REGISTER_ROUTE, controller.userRegister, (req, res) =>
     res.json({ username: req.user.username }))
   app.post(routes.USER_LOGIN_ROUTE, controller.userLogin, (req, res) =>
     res.json({ username: req.user.username }))
   app.post(routes.USER_LOGOUT_ROUTE, controller.userLogout)
-  app.post(routes.CREATE_ROOM_ROUTE, controller.handleRoomAction, (req, res) => {
-    res.json({ data: req.jam })
-  })
+  app.post(routes.CREATE_ROOM_ROUTE, controller.handleRoomAction, (req, res) =>
+    res.json(res.locals.doc))
 
   app.get('*', (req, res) => {
     res.status(404).send(renderApp(req.url))

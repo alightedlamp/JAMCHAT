@@ -37,26 +37,33 @@ export const listRooms = () => (dispatch: Function) => {
     .catch(err => dispatch(listRoomsFail(err)))
 }
 
+export const joinRoom = (data: Object) => (dispatch: Function) => {
+  dispatch(joinRoomRequest)
+  axios
+    .post(jamPageRoute(data.id), { action: 'join' })
+    .then(res =>
+      dispatch(joinRoomSuccess({
+        // eslint-disable-next-line
+          id: res.data._id,
+        users: res.data.users,
+      })))
+    .then(action => dispatch(push(jamPageRoute(action.payload.id))))
+    .catch(err => dispatch(joinRoomFail(err)))
+}
+
 export const createRoom = (data: Object) => (dispatch: Function) => {
   dispatch(createRoomRequest)
   axios
     .post(CREATE_ROOM_ROUTE, data)
     .then(res =>
       dispatch(createRoomSuccess({
-        user: res.data.username,
+        // eslint-disable-next-line
+          id: res.data._id,
         title: res.data.title,
-        bpm: res.data.bpm,
+        bpm: data.bpm,
       })))
-    .then(id => dispatch(push(`/${id}`))) // front end will handle entering room for first time
+    .then(action => dispatch(joinRoom({ id: action.payload.id })))
     .catch(err => dispatch(createRoomFail(err)))
-}
-
-export const joinRoom = (data: Object) => (dispatch: Function) => {
-  dispatch(joinRoomRequest)
-  axios
-    .post(jamPageRoute(data.room_id), { user_id: data.user_id, action: 'join' })
-    .then(() => dispatch(joinRoomSuccess()))
-    .catch(err => dispatch(joinRoomFail(err)))
 }
 
 export const leaveRoom = (data: Object) => (dispatch: Function) => {

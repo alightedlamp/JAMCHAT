@@ -11,7 +11,7 @@ export const REGISTER_PAGE_ROUTE = '/register'
 export const USER_REGISTER_ROUTE = '/register'
 export const USER_LOGIN_ROUTE = '/login'
 export const USER_LOGOUT_ROUTE = '/logout'
-export const LIST_ROOMS_ROUTES = '/list_rooms'
+export const LIST_ROOMS_ROUTE = '/list_rooms'
 export const CREATE_ROOM_ROUTE = '/create_room'
 
 // Isomorphic routes

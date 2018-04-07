@@ -52,7 +52,9 @@ const mapDispatchToProps = dispatch => ({
   handleSubmit: (e) => {
     e.preventDefault()
     dispatch(createRoom({
-      title: e.target.title.value, // TODO include user here
+      action: 'create',
+      title: e.target.title.value,
+      bpm: e.target.bpm.value,
     }))
   },
 })
