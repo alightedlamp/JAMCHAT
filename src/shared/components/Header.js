@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { APP_NAME } from '../config'
 import { HOME_PAGE_ROUTE } from '../routes'
 
-import MainNav from './nav/MainNav'
+import MainNav from '../containers/MainNav'
 
 const AppBar = styled.header`
   position: fixed;
