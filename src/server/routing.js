@@ -1,66 +1,51 @@
 // @flow
 
-import {
-  homePage,
-  aboutPage,
-  lobbyPage,
-  jamPage,
-  loginPage,
-  registerPage,
-  userProfilePage,
-  userRegister,
-  userLogin,
-  userLogout,
-} from './controller'
-
-import {
-  HOME_PAGE_ROUTE,
-  ABOUT_PAGE_ROUTE,
-  LOBBY_PAGE_ROUTE,
-  LOGIN_PAGE_ROUTE,
-  REGISTER_PAGE_ROUTE,
-  USER_REGISTER_ROUTE,
-  USER_LOGIN_ROUTE,
-  USER_LOGOUT_ROUTE,
-  jamPageRoute,
-  userProfilePageRoute,
-} from '../shared/routes'
+import * as controller from './controller'
+import * as routes from '../shared/routes'
 
 import renderApp from './render-app'
 
 export default (app: Object) => {
-  app.get(HOME_PAGE_ROUTE, (req, res) => {
-    res.send(renderApp(req.url, homePage()))
+  // GET routes
+
+  app.get(routes.HOME_PAGE_ROUTE, (req, res) => {
+    res.send(renderApp(req.url, controller.homePage()))
   })
 
-  app.get(ABOUT_PAGE_ROUTE, (req, res) => {
-    res.send(renderApp(req.url, aboutPage()))
+  app.get(routes.ABOUT_PAGE_ROUTE, (req, res) => {
+    res.send(renderApp(req.url, controller.aboutPage()))
   })
 
-  app.get(LOBBY_PAGE_ROUTE, (req, res) => {
-    res.send(renderApp(req.url, lobbyPage()))
+  app.get(routes.LOBBY_PAGE_ROUTE, (req, res) => {
+    res.send(renderApp(req.url, controller.lobbyPage()))
   })
 
-  app.get(LOGIN_PAGE_ROUTE, (req, res) => {
-    res.send(renderApp(req.url, loginPage()))
+  app.get(routes.LOGIN_PAGE_ROUTE, (req, res) => {
+    res.send(renderApp(req.url, controller.loginPage()))
   })
 
-  app.get(REGISTER_PAGE_ROUTE, (req, res) => {
-    res.send(renderApp(req.url, registerPage()))
+  app.get(routes.REGISTER_PAGE_ROUTE, (req, res) => {
+    res.send(renderApp(req.url, controller.registerPage()))
   })
 
-  app.get(jamPageRoute(), (req, res) => {
-    res.send(renderApp(req.url, jamPage(req.params.id)))
+  app.get(routes.jamPageRoute(), (req, res) => {
+    res.send(renderApp(req.url, controller.jamPage(req.params.id)))
   })
 
-  app.get(userProfilePageRoute(), (req, res) => {
-    res.send(renderApp(req.url, userProfilePage(req.params.id)))
+  app.get(routes.userProfilePageRoute(), (req, res) => {
+    res.send(renderApp(req.url, controller.userProfilePage(req.params.id)))
   })
 
-  app.post(USER_REGISTER_ROUTE, userRegister, (req, res) =>
+  // POST routes
+  app.post(routes.jamPageRoute(), controller.handleRoomAction)
+  app.post(routes.USER_REGISTER_ROUTE, controller.userRegister, (req, res) =>
     res.json({ username: req.user.username }))
-  app.post(USER_LOGIN_ROUTE, userLogin, (req, res) => res.json({ username: req.user.username }))
-  app.post(USER_LOGOUT_ROUTE, userLogout)
+  app.post(routes.USER_LOGIN_ROUTE, controller.userLogin, (req, res) =>
+    res.json({ username: req.user.username }))
+  app.post(routes.USER_LOGOUT_ROUTE, controller.userLogout)
+  app.post(routes.CREATE_ROOM_ROUTE, controller.handleRoomAction, (req, res) => {
+    res.json({ data: req.jam })
+  })
 
   app.get('*', (req, res) => {
     res.status(404).send(renderApp(req.url))

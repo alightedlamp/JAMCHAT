@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 import LogoutButton from '../../containers/LogoutButton'
+import ModalContainer from '../../containers/ModalContainer'
 
 import {
   HOME_PAGE_ROUTE,
@@ -49,11 +50,14 @@ const MenuButton = styled.button`
 `
 
 const MainNav = (props: Object) => {
-  console.log(props.user)
   const isLoggedIn = props.user.authenticated
   const loginSection = isLoggedIn ? (
     <Fragment>
       <NavUser>{props.user.username}</NavUser>
+      <ModalContainer openModalText="Start Jam" label="Start Jam">
+        <label htmlFor="title">Title:</label> <input type="text" name="title" />
+        <label htmlFor="bpm">BPM:</label> <input type="number" name="bpm" />
+      </ModalContainer>
       <LogoutButton />
     </Fragment>
   ) : (
