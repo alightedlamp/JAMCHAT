@@ -1,19 +1,18 @@
 // @flow
 
-import React, { Component } from 'react'
+import React from 'react'
 
-class Jam extends Component {
-  constructor() {
-    super()
-  }
-  render() {
-    return (
-      <div>
-        <h2>Jam</h2>
-        <p>Here we go!</p>
-      </div>
-    )
-  }
-}
+import PageWrapper from '../PageWrapper'
+import PanelWrapper from '../PanelWrapper'
+import ChatPanel from '../ChatPanel'
+
+const Jam = props => (
+  <PageWrapper>
+    <PanelWrapper>
+      <h2 className="f2 lh-title mt3">Jam{(props.name && `: ${props.name}`) || ''}</h2>
+      <ChatPanel />
+    </PanelWrapper>
+  </PageWrapper>
+)
 
 export default Jam

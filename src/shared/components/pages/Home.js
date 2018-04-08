@@ -3,15 +3,13 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import Footer from '../Footer'
+import PageWrapper from '../PageWrapper'
+import HeroBlockWrapper from '../HeroBlockWrapper'
+
 const Page = styled.section`
   top: 75px;
   width: 100%;
-`
-
-const ContentBlock = styled.section`
-  height: 500px;
-  background-color: ${props => props.color};
-  display: grid;
 `
 
 const CtaHeader = styled.h2`
@@ -29,14 +27,15 @@ const CtaButton = styled.button`
 `
 
 const Home = () => (
-  <Page>
-    <ContentBlock className="about" color="lightblue">
+  <PageWrapper>
+    <HeroBlockWrapper className="about" color="lightblue" homepage="true">
       <CtaHeader>Make music while chatting with your friends</CtaHeader>
-    </ContentBlock>
-    <ContentBlock className="get-started" color="#17A589">
+    </HeroBlockWrapper>
+    <HeroBlockWrapper className="get-started" color="#17A589" homepage="true">
       <CtaButton color="blue">Jam!</CtaButton>
-    </ContentBlock>
-  </Page>
+    </HeroBlockWrapper>
+    <Footer />
+  </PageWrapper>
 )
 
 export default Home

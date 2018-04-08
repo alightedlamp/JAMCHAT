@@ -5,13 +5,10 @@ import { connect } from 'react-redux'
 import { registerUser } from '../actions/user'
 import Form from '../components/Form'
 
-const mapStateToProps = () => ({
-  title: 'Register',
-})
-
 const mapDispatchToProps = dispatch => ({
   handleSubmit: (e) => {
     e.preventDefault()
+    // This needts to handle any values entered from the form
     dispatch(registerUser({
       username: e.target.username.value,
       password: e.target.password.value,
@@ -19,4 +16,4 @@ const mapDispatchToProps = dispatch => ({
   },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form)
+export default connect(null, mapDispatchToProps)(Form)

@@ -16,17 +16,19 @@ import {
 } from '../../routes'
 
 const NavContainer = styled.nav`
-  display: grid;
-  grid-template-areas: 'pagesSubNav . loginSubNav';
-  grid-template-columns: 20% auto 25%;
+  display: flex;
+  justify-content: space-between;
 `
 
 const LinkList = styled.ul`
-  grid-area: ${props => props.gridAreaName};
   display: flex;
   align-items: center;
   justify-content: space-between;
   list-style-type: none;
+`
+
+const LinkListItem = styled.li`
+  width: 100px;
 `
 
 const NavUser = styled.span`
@@ -54,10 +56,6 @@ const MainNav = (props: Object) => {
   const loginSection = isLoggedIn ? (
     <Fragment>
       <NavUser>{props.user.username}</NavUser>
-      <ModalContainer openModalText="Start Jam" label="Start Jam">
-        <label htmlFor="title">Title:</label> <input type="text" name="title" />
-        <label htmlFor="bpm">BPM:</label> <input type="number" name="bpm" />
-      </ModalContainer>
       <LogoutButton />
     </Fragment>
   ) : (
@@ -70,22 +68,38 @@ const MainNav = (props: Object) => {
       </NavLink>
     </Fragment>
   )
+  const roomLinksContainer = () => {
+    if (isLoggedIn) {
+      if (!props.jam) {
+        return (
+          <Fragment>
+            <ModalContainer openModalText="Start Jam" label="Start Jam">
+              <label htmlFor="title">Title:</label> <input type="text" name="title" />
+              <label htmlFor="bpm">BPM:</label> <input type="number" name="bpm" />
+            </ModalContainer>
+          </Fragment>
+        )
+      }
+      return <button>Leave Jam</button>
+    }
+  }
+
   return (
     <NavContainer>
-      <LinkList gridAreaName="pagesSubNav">
+      <LinkList>
         {[
-          { route: HOME_PAGE_ROUTE, label: 'Home' },
           { route: ABOUT_PAGE_ROUTE, label: 'About' },
           { route: LOBBY_PAGE_ROUTE, label: 'Lobby' },
         ].map(link => (
-          <li key={link.route}>
+          <LinkListItem key={link.route}>
             <NavLink to={link.route} exact>
               {link.label}
             </NavLink>
-          </li>
+          </LinkListItem>
         ))}
       </LinkList>
-      <LinkList gridAreaName="loginSubNav">{loginSection}</LinkList>
+      <LinkList>{roomLinksContainer()}</LinkList>
+      <LinkList>{loginSection}</LinkList>
     </NavContainer>
   )
 }
