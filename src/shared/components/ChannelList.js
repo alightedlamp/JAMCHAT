@@ -8,8 +8,10 @@ import Channel from './Channel'
 const ChannelList = props => (
   <PanelWrapper>
     <div>
-      <button>Active Channels</button>
-      <button>Inactive Channels</button>
+      <select>
+        <option>Active Channels</option>
+        <option>Inactive Channels</option>
+      </select>
     </div>
     {props.channels && props.channels.map(channel => <Channel />)}
   </PanelWrapper>
