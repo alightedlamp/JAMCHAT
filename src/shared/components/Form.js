@@ -1,18 +1,19 @@
 // @flow
 
 import React from 'react'
+import styled from 'styled-components'
 
 type Props = {
   title: string,
+  children: Object,
   handleSubmit: Function,
 }
 
-const Form = ({ title, handleSubmit }: Props) => (
+const Form = ({ title, handleSubmit, children }: Props) => (
   <div className="form-container">
-    <h3>{title}</h3>
+    {title && <h3>{title}</h3>}
     <form onSubmit={handleSubmit}>
-      <label htmlFor="username">Username:</label> <input type="text" name="username" />
-      <label htmlFor="password">Password:</label> <input type="password" name="password" />
+      {children}
       <button type="submit">Submit</button>
     </form>
   </div>

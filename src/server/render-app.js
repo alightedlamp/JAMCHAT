@@ -27,7 +27,12 @@ const renderApp = (location: string, plainPartialState: ?Object, routerContext: 
           ${head.title}
           ${head.meta}
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-          <link rel="stylesheet" href="${STATIC_PATH}/css/reset.css">
+          ${['reset', 'tachyons.min', 'styles']
+    .map(file =>
+      `<link rel="stylesheet" type="text/css" href="${
+        isProd ? STATIC_PATH : `http://localhost:${WDS_PORT}/dist`
+      }/css/${file}.css" />`)
+    .join('')}
         </head>
         <body>
           <div class="${APP_CONTAINER_CLASS}">${appHtml}</div>

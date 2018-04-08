@@ -5,10 +5,6 @@ import { connect } from 'react-redux'
 import { loginUser } from '../actions/user'
 import Form from '../components/Form'
 
-const mapStateToProps = () => ({
-  title: 'Login',
-})
-
 const mapDispatchToProps = dispatch => ({
   handleSubmit: (e) => {
     e.preventDefault()
@@ -19,4 +15,4 @@ const mapDispatchToProps = dispatch => ({
   },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form)
+export default connect(null, mapDispatchToProps)(Form)
