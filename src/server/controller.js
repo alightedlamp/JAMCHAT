@@ -2,19 +2,19 @@
 
 import passport from 'passport'
 
-import Arrangement from './models/arrangement'
-import Jam from './models/jam'
-import Message from './models/message'
-import Sequence from './models/sequence'
 import User from './models/user'
+import Jam from './models/jam'
+// import Message from './models/message'
+// import Arrangement from './models/arrangement'
+// import Sequence from './models/sequence'
 
 export const homePage = () => null
 export const aboutPage = () => null
 export const lobbyPage = () => null
 export const loginPage = () => null
 export const registerPage = () => null
-export const jamPage = (id: string) => null
-export const userProfilePage = (id: string) => null
+export const jamPage = () => null
+export const userProfilePage = () => null
 
 export const userRegister = (req: Object, res: Object, next: Function) => {
   User.register(new User({ username: req.body.username }), req.body.password)
@@ -40,9 +40,9 @@ export const createRoom = (req: Object) =>
 export const joinRoom = (req: Object) =>
   Jam.findByIdAndUpdate(
     { _id: req.params.id },
-    // eslint-disable-next-line
     {
       $push: {
+        // eslint-disable-next-line
         users: { username: req.user.username, id: req.user._id },
         contributors: { username: req.user.username },
       },

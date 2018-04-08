@@ -8,7 +8,7 @@ import {
   IO_CLIENT_HELLO,
   IO_CLIENT_JOIN_ROOM,
   IO_SERVER_HELLO,
-} from '../shared/config'
+} from '../shared/constants/messageTypes'
 
 const socket = socketIOClient(window.location.host)
 

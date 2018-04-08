@@ -1,12 +1,13 @@
 // @flow
 
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Switch } from 'react-router'
 import { Route } from 'react-router-dom'
 import Helmet from 'react-helmet'
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 
 import { APP_NAME } from './config'
+import theme from './theme'
 
 import Header from './components/Header'
 
@@ -36,7 +37,7 @@ const AppContainer = styled.div`
 `
 
 const App = () => (
-  <Fragment>
+  <ThemeProvider theme={theme}>
     <AppContainer>
       <Helmet titleTemplate={`%s | ${APP_NAME}`} defaultTitle={APP_NAME} />
       <Header />
@@ -50,7 +51,7 @@ const App = () => (
         <Route component={NotFound} />
       </Switch>
     </AppContainer>
-  </Fragment>
+  </ThemeProvider>
 )
 
 export default App

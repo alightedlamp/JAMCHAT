@@ -6,7 +6,7 @@ import PanelWrapper from './PanelWrapper'
 import Channel from './Channel'
 
 type Props = {
-  channels: Object,
+  channels?: Array<Object>,
 }
 
 const ChannelList = ({ channels }: Props) => (
@@ -24,5 +24,9 @@ const ChannelList = ({ channels }: Props) => (
       ))}
   </PanelWrapper>
 )
+
+ChannelList.defaultProps = {
+  channels: [],
+}
 
 export default ChannelList

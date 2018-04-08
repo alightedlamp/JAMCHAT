@@ -26,16 +26,16 @@ const Register = () => (
       </p>
       <RegisterForm>
         <Field>
-          <label htmlFor="name">Name:</label> <input type="text" name="name" />
+          <label htmlFor="name">Name: <input type="text" name="name" /></label>
         </Field>
         <Field>
-          <label htmlFor="email">E-mail:</label> <input type="text" name="email" />
+          <label htmlFor="email">E-mail: <input type="text" name="email" /></label>
         </Field>
         <Field>
-          <label htmlFor="username">Username:</label> <input type="text" name="username" />
+          <label htmlFor="username">Username: <input type="text" name="username" /></label>
         </Field>
         <Field>
-          <label htmlFor="password">Password:</label> <input type="password" name="password" />
+          <label htmlFor="password">Password: <input type="password" name="password" /></label>
         </Field>
       </RegisterForm>
     </ContentBlock>

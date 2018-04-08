@@ -15,5 +15,5 @@ export const LIST_ROOMS_ROUTE = '/list_rooms'
 export const CREATE_ROOM_ROUTE = '/create_room'
 
 // Isomorphic routes
-export const jamPageRoute = (id: string) => `/jam/${id || ':id'}`
-export const userProfilePageRoute = (id: string) => `/user/${id || ':id'}`
+export const jamPageRoute = (id?: string) => `/jam/${id || ':id'}`
+export const userProfilePageRoute = (id?: string) => `/user/${id || ':id'}`

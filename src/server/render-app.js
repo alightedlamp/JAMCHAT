@@ -13,11 +13,14 @@ import { isProd } from '../shared/util'
 
 const renderApp = (location: string, plainPartialState: ?Object, routerContext: ?Object = {}) => {
   const store = initStore(plainPartialState)
-  const appHtml = ReactDOMServer.renderToString(<Provider store={store}>
-    <StaticRouter location={location} context={routerContext}>
-      <App />
-    </StaticRouter>
-  </Provider>)
+  const app = (
+    <Provider store={store}>
+      <StaticRouter location={location} context={routerContext}>
+        <App />
+      </StaticRouter>
+    </Provider>
+  )
+  const appHtml = ReactDOMServer.renderToString(app)
   const head = Helmet.rewind()
 
   return `<!doctype html>

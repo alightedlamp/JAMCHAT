@@ -29,12 +29,10 @@ export default (app: Object) => {
   })
 
   app.get(routes.jamPageRoute(), (req, res) =>
-    controller
-      .joinRoom(req, res)
-      .then(() => res.send(renderApp(req.url, controller.jamPage(req.params.id)))))
+    controller.joinRoom(req).then(() => res.send(renderApp(req.url, controller.jamPage()))))
 
   app.get(routes.userProfilePageRoute(), (req, res) => {
-    res.send(renderApp(req.url, controller.userProfilePage(req.params.id)))
+    res.send(renderApp(req.url, controller.userProfilePage()))
   })
 
   // POST routes

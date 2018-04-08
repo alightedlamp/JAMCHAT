@@ -2,7 +2,6 @@
 
 import React from 'react'
 import Helmet from 'react-helmet'
-import styled from 'styled-components'
 
 import Footer from '../Footer'
 import PageWrapper from '../PageWrapper'
@@ -34,7 +33,8 @@ const About = () => (
         <p className="lh-copy mt3">
           Speaking of lifting, much of the boilerplate was introduced to me through{' '}
           <a href="https://github.com/verekia/js-stack-from-scratch">@verekia&rsquo;s</a> wonderful
-          JavaScript Stack from Scratch tutorial.
+          JavaScript Stack from Scratch tutorial, without which I wouldn&rsquo;t have understood so
+          clearly how all the pieces in a modern full stack JavaScript application fit toghether.
         </p>
         <p className="lh-copy mt3">
           This is an open source project which is{' '}

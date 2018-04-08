@@ -22,10 +22,14 @@ const Login = () => (
       <h2 className="f2 lh-title mt3">Login</h2>
       <LoginForm>
         <Field>
-          <label htmlFor="username">Username:</label> <input type="text" name="username" />
+          <label htmlFor="username">
+            Username: <input type="text" name="username" />
+          </label>
         </Field>
         <Field>
-          <label htmlFor="password">Password:</label> <input type="password" name="password" />
+          <label htmlFor="password">
+            Password: <input type="password" name="password" />
+          </label>
         </Field>
       </LoginForm>
     </ContentBlock>

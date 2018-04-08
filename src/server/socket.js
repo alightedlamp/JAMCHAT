@@ -6,7 +6,7 @@ import {
   IO_CLIENT_JOIN_ROOM,
   IO_CLIENT_HELLO,
   IO_SERVER_HELLO,
-} from '../shared/config'
+} from '../shared/constants/messageTypes'
 
 /* eslint-disable no-console */
 const setUpSocket = (io: Object) => {
@@ -15,7 +15,7 @@ const setUpSocket = (io: Object) => {
 
     socket.on(IO_CLIENT_JOIN_ROOM, (room) => {
       socket.join(room)
-      console.log(`[socket.io] a client joined room ${room}`);
+      console.log(`[socket.io] a client joined room ${room}`)
 
       io.emit(IO_SERVER_HELLO, 'Hello everyone!')
       io.to(room).emit(IO_SERVER_HELLO, `Hello clients of room ${room}`)
@@ -23,11 +23,11 @@ const setUpSocket = (io: Object) => {
     })
 
     socket.on(IO_CLIENT_HELLO, (clientMessage) => {
-      console.log(`[socket.io] client: ${clientMessage}`);
+      console.log(`[socket.io] client: ${clientMessage}`)
     })
 
     socket.on(IO_DISCONNECT, () => {
-      console.log('[socket.io] a client disconnected');
+      console.log('[socket.io] a client disconnected')
     })
   })
 }

@@ -1,7 +1,5 @@
 // @flow
 
-import Immutable from 'immutable'
-
 import {
   LIST_ROOMS_REQUEST,
   LIST_ROOMS_SUCCESS,

@@ -10,11 +10,6 @@ import HeroBlockWrapper from '../HeroBlockWrapper'
 
 import { APP_DESCRIPTION } from '../../config'
 
-const Page = styled.section`
-  top: 75px;
-  width: 100%;
-`
-
 const CtaHeader = styled.h2`
   align-self: center;
   justify-self: center;

@@ -10,6 +10,8 @@ const mapDispatchToProps = dispatch => ({
     e.preventDefault()
     // This needts to handle any values entered from the form
     dispatch(registerUser({
+      name: e.target.name.value,
+      email: e.target.email.value,
       username: e.target.username.value,
       password: e.target.password.value,
     }))
