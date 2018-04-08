@@ -1,4 +1,9 @@
 {
   "presets": ["env", "flow", "react"],
-  "plugins": ["flow-react-proptypes", "transform-class-properties", "transform-object-rest-spread"]
+  "plugins": [
+    "flow-react-proptypes",
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    "css-modules-transform"
+  ]
 }
