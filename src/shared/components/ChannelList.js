@@ -5,15 +5,23 @@ import React from 'react'
 import PanelWrapper from './PanelWrapper'
 import Channel from './Channel'
 
-const ChannelList = props => (
+type Props = {
+  channels: Object,
+}
+
+const ChannelList = ({ channels }: Props) => (
   <PanelWrapper>
     <div>
       <select>
-        <option>Active Channels</option>
-        <option>Inactive Channels</option>
+        <option name="active">Active Channels</option>
+        <option name="open">Open Channels</option>
+        <option name="inactive">Inactive Channels</option>
       </select>
     </div>
-    {props.channels && props.channels.map(channel => <Channel />)}
+    {channels &&
+      channels.map(channel => (
+        <Channel name={channel.name} user={channel.users} bpm={channel.bpm} />
+      ))}
   </PanelWrapper>
 )
 

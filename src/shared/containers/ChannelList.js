@@ -4,4 +4,8 @@ import { connect } from 'react-redux'
 
 import ChannelList from '../components/ChannelList'
 
-export default connect()(ChannelList)
+const mapStateToProps = state => ({
+  channels: state.channels,
+})
+
+export default connect(mapStateToProps)(ChannelList)

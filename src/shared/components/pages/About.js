@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react'
+import Helmet from 'react-helmet'
 import styled from 'styled-components'
 
 import Footer from '../Footer'
@@ -8,8 +9,19 @@ import PageWrapper from '../PageWrapper'
 import HeroBlockWrapper from '../HeroBlockWrapper'
 import ContentBlock from '../ContentBlock'
 
+import { APP_DESCRIPTION } from '../../config'
+
+const title = 'About'
+
 const About = () => (
   <PageWrapper>
+    <Helmet
+      title={title}
+      meta={[
+        { name: 'description', content: APP_DESCRIPTION },
+        { property: 'og:title', content: title },
+      ]}
+    />
     <HeroBlockWrapper color="#f9c52c">
       <ContentBlock>
         <h2 className="f2 lh-title mt3">About</h2>

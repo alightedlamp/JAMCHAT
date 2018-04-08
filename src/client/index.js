@@ -12,6 +12,7 @@ import thunkMiddleware from 'redux-thunk'
 
 import App from '../shared/App'
 import { APP_CONTAINER_SELECTOR } from '../shared/config'
+import setUpSocket from './socket'
 
 import rootReducer from '../shared/reducers'
 
@@ -45,3 +46,5 @@ if (module.hot) {
     ReactDOM.render(wrapApp(NextApp), rootEl)
   })
 }
+
+setUpSocket(store)

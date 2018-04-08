@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react'
+import Helmet from 'react-helmet'
 import styled from 'styled-components'
 
 import Footer from '../Footer'
@@ -12,8 +13,11 @@ const Field = styled.div`
   margin: 20px 0;
 `
 
+const title = 'Register'
+
 const Register = () => (
   <PageWrapper>
+    <Helmet title={title} meta={[{ property: 'og:title', content: title }]} />
     <ContentBlock>
       <h2 className="f2 lh-title mt3">Register</h2>
       <p className="mv3 lh-copy">
