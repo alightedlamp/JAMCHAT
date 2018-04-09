@@ -3,11 +3,15 @@
 import * as React from 'react'
 import styled from 'styled-components'
 
+type Props = {
+  children: React.Node,
+}
+
 const Page = styled.section`
   margin-top: 115px;
   width: 100%;
 `
 
-const PageWrapper = props => <Page>{props.children}</Page>
+const PageWrapper = ({ children }: Props) => <Page>{children}</Page>
 
 export default PageWrapper

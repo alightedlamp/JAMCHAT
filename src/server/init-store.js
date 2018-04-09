@@ -11,7 +11,7 @@ const initStore = (plainPartialState: ?Object) => {
 
   if (plainPartialState && plainPartialState.user) {
     // flow-disable-next-line
-    preloadedState.user = userReducer(undefined, {}).merge(Immutable.fromJS(plainPartialState.hello))
+    preloadedState.user = userReducer(undefined, {}).merge(Immutable.fromJS(plainPartialState.user))
   }
 
   return createStore(userReducer, preloadedState, applyMiddleware(thunkMiddleware))

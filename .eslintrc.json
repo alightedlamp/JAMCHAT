@@ -8,6 +8,7 @@
   "plugins": ["compat", "flowtype", "react", "babel"],
   "rules": {
     "semi": [2, "never"],
+    "max-len": "off",
     "no-unexpected-multiline": 2,
     "compat/compat": 2,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
