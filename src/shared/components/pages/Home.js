@@ -1,16 +1,14 @@
 // @flow
 
 import React from 'react'
+import Helmet from 'react-helmet'
 import styled from 'styled-components'
 
 import Footer from '../Footer'
 import PageWrapper from '../PageWrapper'
 import HeroBlockWrapper from '../HeroBlockWrapper'
 
-const Page = styled.section`
-  top: 75px;
-  width: 100%;
-`
+import { APP_DESCRIPTION } from '../../config'
 
 const CtaHeader = styled.h2`
   align-self: center;
@@ -28,6 +26,7 @@ const CtaButton = styled.button`
 
 const Home = () => (
   <PageWrapper>
+    <Helmet meta={[{ name: 'description', content: APP_DESCRIPTION }]} />
     <HeroBlockWrapper className="about" color="lightblue" homepage="true">
       <CtaHeader>Make music while chatting with your friends</CtaHeader>
     </HeroBlockWrapper>

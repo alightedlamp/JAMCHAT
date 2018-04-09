@@ -4,11 +4,11 @@ import React, { Fragment } from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
+import Button from '../Button'
 import LogoutButton from '../../containers/LogoutButton'
 import ModalContainer from '../../containers/ModalContainer'
 
 import {
-  HOME_PAGE_ROUTE,
   ABOUT_PAGE_ROUTE,
   LOBBY_PAGE_ROUTE,
   LOGIN_PAGE_ROUTE,
@@ -35,24 +35,14 @@ const NavUser = styled.span`
   font-size: 1.25em;
 `
 
-const MenuButton = styled.button`
-  padding: 7px;
-  margin: 0 10px;
-  width: 100px;
-  font-size: 1.15em;
-  border: 3px solid blue;
-  background: lightblue;
-  color: blue;
-
-  &:hover {
-    background: blue;
-    color: lightblue;
-    transition: 0.5s;
-  }
+const Field = styled.div`
+  margin: 20px 0;
 `
 
 const MainNav = (props: Object) => {
   const isLoggedIn = props.user.authenticated
+  const currentRoom = props.currenRoom
+
   const loginSection = isLoggedIn ? (
     <Fragment>
       <NavUser>{props.user.username}</NavUser>
@@ -61,27 +51,36 @@ const MainNav = (props: Object) => {
   ) : (
     <Fragment>
       <NavLink to={LOGIN_PAGE_ROUTE} exact>
-        <MenuButton>Login</MenuButton>
+        <Button label="Login" />
       </NavLink>
       <NavLink to={REGISTER_PAGE_ROUTE} exact>
-        <MenuButton>Register</MenuButton>
+        <Button label="Register" />
       </NavLink>
     </Fragment>
   )
   const roomLinksContainer = () => {
     if (isLoggedIn) {
-      if (!props.jam) {
+      if (!currentRoom) {
         return (
           <Fragment>
-            <ModalContainer openModalText="Start Jam" label="Start Jam">
-              <label htmlFor="title">Title:</label> <input type="text" name="title" />
-              <label htmlFor="bpm">BPM:</label> <input type="number" name="bpm" />
+            <ModalContainer openModalText="New Jam" label="New Jam">
+              <Field>
+                <label htmlFor="title">
+                  Title: <input type="text" name="title" />
+                </label>
+              </Field>
+              <Field>
+                <label htmlFor="bpm">
+                  BPM: <input type="number" name="bpm" />
+                </label>
+              </Field>
             </ModalContainer>
           </Fragment>
         )
       }
-      return <button>Leave Jam</button>
+      return <Button label="Leave Jam" />
     }
+    return null
   }
 
   return (

@@ -1,7 +1,12 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import styled from 'styled-components'
+
+type Props = {
+  visible: string,
+  children: React.Node,
+}
 
 const Wrapper = styled.div`
   visibility: ${props => (props.visible ? 'visible' : 'hidden')};
@@ -24,12 +29,12 @@ const HamburgerMenu = styled.div`
   background-color: #888;
   z-index: 2;
 `
-const Sidebar = (props) => {
-  const isVisible = props.visible
+const Sidebar = ({ visible, children }: Props) => {
+  const isVisible = visible
   return (
     <Wrapper visible={isVisible}>
       <HamburgerMenu visible={isVisible}>
-        <nav>{props.children}</nav>
+        <nav>{children}</nav>
       </HamburgerMenu>
     </Wrapper>
   )

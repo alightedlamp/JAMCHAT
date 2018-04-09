@@ -12,7 +12,7 @@ import MainNav from '../containers/MainNav'
 const AppBar = styled.header`
   position: fixed;
   display: grid;
-  grid-template-columns: 200px auto;
+  grid-template-columns: 250px auto;
   top: 0;
   left: 0;
   background-color: tomato;

@@ -23,7 +23,9 @@ const jamSchema = Schema({
     type: Date,
     default: Date.now(),
   },
-  total_contributors: Number,
+  contributors: {
+    type: Array,
+  },
 })
 
 export default mongoose.model('Jam', jamSchema)

@@ -1,15 +1,26 @@
 // @flow
 
 import React from 'react'
-import styled from 'styled-components'
+import Helmet from 'react-helmet'
 
 import Footer from '../Footer'
 import PageWrapper from '../PageWrapper'
 import HeroBlockWrapper from '../HeroBlockWrapper'
 import ContentBlock from '../ContentBlock'
 
+import { APP_DESCRIPTION } from '../../config'
+
+const title = 'About'
+
 const About = () => (
   <PageWrapper>
+    <Helmet
+      title={title}
+      meta={[
+        { name: 'description', content: APP_DESCRIPTION },
+        { property: 'og:title', content: title },
+      ]}
+    />
     <HeroBlockWrapper color="#f9c52c">
       <ContentBlock>
         <h2 className="f2 lh-title mt3">About</h2>
@@ -22,7 +33,8 @@ const About = () => (
         <p className="lh-copy mt3">
           Speaking of lifting, much of the boilerplate was introduced to me through{' '}
           <a href="https://github.com/verekia/js-stack-from-scratch">@verekia&rsquo;s</a> wonderful
-          JavaScript Stack from Scratch tutorial.
+          JavaScript Stack from Scratch tutorial, without which I wouldn&rsquo;t have understood so
+          clearly how all the pieces in a modern full stack JavaScript application fit toghether.
         </p>
         <p className="lh-copy mt3">
           This is an open source project which is{' '}

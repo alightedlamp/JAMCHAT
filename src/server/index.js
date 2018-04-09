@@ -4,16 +4,19 @@ import { Server } from 'http'
 import session from 'express-session'
 import compression from 'compression'
 import passport from 'passport'
-
-import { APP_NAME, STATIC_PATH, WEB_PORT } from '../shared/config'
-import { isProd } from '../shared/util'
+import socketIO from 'socket.io'
 
 import './db'
 import routing from './routing'
+import { APP_NAME, STATIC_PATH, WEB_PORT } from '../shared/config'
+import { isProd } from '../shared/util'
+import setUpSocket from './socket'
 import User from './models/user'
 
 const app = express()
 const http = Server(app)
+const io = socketIO(http)
+setUpSocket(io)
 
 passport.use(User.createStrategy())
 passport.serializeUser(User.serializeUser())

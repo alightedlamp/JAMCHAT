@@ -2,21 +2,37 @@
 
 import passport from 'passport'
 
-import Arrangement from './models/arrangement'
-import Jam from './models/jam'
-import Message from './models/message'
-import Sequence from './models/sequence'
 import User from './models/user'
+import Jam from './models/jam'
+// import Message from './models/message'
+// import Arrangement from './models/arrangement'
+// import Sequence from './models/sequence'
+
+/* ////////////////////////////////////////
+//      GET HTML Routes
+//////////////////////////////////////// */
 
 export const homePage = () => null
 export const aboutPage = () => null
 export const lobbyPage = () => null
 export const loginPage = () => null
 export const registerPage = () => null
+export const jamPage = () => null
+export const userProfilePage = () => null
 
-export const jamPage = (id: string) => null
+/* ////////////////////////////////////////
+//      GET API Routes
+//////////////////////////////////////// */
 
-export const userProfilePage = (id: string) => null
+export const listRooms = (req, res, next) =>
+  Jam.find({}).then((docs) => {
+    res.locals.docs = docs
+    next()
+  })
+
+/* ////////////////////////////////////////
+//      POST API Routes
+//////////////////////////////////////// */
 
 export const userRegister = (req: Object, res: Object, next: Function) => {
   User.register(new User({ username: req.body.username }), req.body.password)
@@ -32,27 +48,28 @@ export const userLogout = (req: Object, res: Object) => {
   res.sendStatus(200)
 }
 
-export const createRoom = (req, res) =>
+export const createRoom = (req: Object) =>
   Jam.create({
+    // eslint-disable-next-line
     created_by: req.user._id,
     title: req.body.title,
-    bpm: req.body.bpm,
   })
 
-export const joinRoom = (req, res) =>
+export const joinRoom = (req: Object) =>
   Jam.findByIdAndUpdate(
     { _id: req.params.id },
-    // Increment total contributors here
-    { $push: { users: { username: req.user.username, id: req.user._id } } },
+    {
+      $push: {
+        // eslint-disable-next-line
+        users: { username: req.user.username, id: req.user._id },
+        contributors: { username: req.user.username },
+      },
+    },
     { new: true },
   ).exec()
 
-export const leaveRoom = req =>
-  Jam.findOne({ _id: req.room_id }, (err, doc) => {
-    if (err) {
-      return err
-    }
-
+export const leaveRoom = (req: Object) =>
+  Jam.findOne({ _id: req.room_id }).then((doc) => {
     const records = { data: doc }
     const { users } = doc
     const currentUserIdx = users.indexOf(req.user_id)
@@ -64,22 +81,22 @@ export const leaveRoom = req =>
       }
       return records
     })
-  }) // Remove the user from the room
+  })
 
 export const handleRoomAction = (req: Object, res: Object, next: Function) => {
   switch (req.body.action) {
     case 'create':
-      return createRoom(req, res).then((doc) => {
+      return createRoom(req).then((doc) => {
         res.locals.doc = doc
         next()
       })
     case 'join':
-      return joinRoom(req, res).then((doc) => {
+      return joinRoom(req).then((doc) => {
         res.locals.doc = doc
         next()
       })
     case 'leave':
-      return leaveRoom(req, res)
+      return leaveRoom(req).then(() => next())
     default:
       return new Error(`Sorry, an error occurred when attempting to ${req.body.action} room.`)
   }

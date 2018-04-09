@@ -1,12 +1,6 @@
 // @flow
 
-import Immutable from 'immutable'
-
 import {
-  LIST_ROOMS_REQUEST,
-  LIST_ROOMS_SUCCESS,
-  LIST_ROOMS_FAIL,
-  SET_VISIBILITY_FILTER,
   CREATE_ROOM_REQUEST,
   CREATE_ROOM_SUCCESS,
   CREATE_ROOM_FAIL,
@@ -18,16 +12,11 @@ import {
   LEAVE_ROOM_FAIL,
 } from '../constants/actionTypes'
 
-const jamRoomReducer = (state: Object = {}, action: { type: string, payload: Object }) => {
+const jamRoomReducer = (
+  state: Object = {},
+  action: { type: string, payload: Object },
+) => {
   switch (action.type) {
-    case LIST_ROOMS_REQUEST:
-      return { ...state, fetching: true }
-    case LIST_ROOMS_SUCCESS:
-      return { ...state, ...action.payload }
-    case LIST_ROOMS_FAIL:
-      return { ...state, error: { ...action.payload } }
-    case SET_VISIBILITY_FILTER:
-      return { ...state } // TODO
     case CREATE_ROOM_REQUEST:
       return { ...state, fetching: true }
     case CREATE_ROOM_SUCCESS:

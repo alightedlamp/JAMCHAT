@@ -24,16 +24,18 @@ export const joinRoomFail = createAction(types.JOIN_ROOM_FAIL)
 export const leaveRoomRequest = createAction(types.LEAVE_ROOM_REQUEST)
 export const leaveRoomSuccess = createAction(types.LEAVE_ROOM_SUCCESS)
 export const leaveRoomFail = createAction(types.LEAVE_ROOM_FAIL)
+
 export const setJamBpm = createAction(types.SET_JAM_BPM)
 
 export const listRooms = () => (dispatch: Function) => {
-  dispatch(listRoomsRequest)
+  dispatch(listRoomsRequest())
   axios
     .get(LIST_ROOMS_ROUTE)
-    .then(res =>
+    .then((res) => {
       dispatch(listRoomsSuccess({
-        rooms: res.rooms,
-      })))
+        rooms: res.data,
+      }))
+    })
     .catch(err => dispatch(listRoomsFail(err)))
 }
 
@@ -69,7 +71,10 @@ export const createRoom = (data: Object) => (dispatch: Function) => {
 export const leaveRoom = (data: Object) => (dispatch: Function) => {
   dispatch(leaveRoomRequest)
   axios
-    .post(jamPageRoute(data.room_id), { user_id: data.user_id, action: 'leave' })
+    .post(jamPageRoute(data.room_id), {
+      user_id: data.user_id,
+      action: 'leave',
+    })
     .then(() => dispatch(leaveRoomSuccess()))
     .catch(err => dispatch(leaveRoomFail(err)))
 }

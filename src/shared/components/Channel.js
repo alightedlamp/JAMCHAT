@@ -1,8 +1,7 @@
 // @flow
 
 import React from 'react'
-import styled from 'styled-components'
 
-const Channel = () => <div>Channel</div>
+const Channel = props => <div>{props.children}</div>
 
 export default Channel
