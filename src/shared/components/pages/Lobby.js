@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import PageWrapper from '../PageWrapper'
 import PanelWrapper from '../PanelWrapper'
-import ChannelList from '../ChannelList'
+import ChannelList from '../../containers/ChannelList'
 
 const LobbyView = styled.section`
   grid-template-rows: 100px auto;

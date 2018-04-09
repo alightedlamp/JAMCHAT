@@ -1,9 +1,9 @@
 {
   "name": "jamchat",
   "version": "1.0.0",
-  "description": "Chat-based ephemeral electroinic music application",
+  "description": "Chat-based ephemeral electroinic music collaboration",
   "main": "index.js",
-  "repository": "https://github.com/alightedlamp/JAMCHAT",
+  "repository": "https://github.com/alightedlamp/JAMCHAT.CLUB",
   "author": "Philip Harrell",
   "license": "MIT",
   "browserslist": [

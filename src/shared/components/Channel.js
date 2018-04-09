@@ -2,6 +2,6 @@
 
 import React from 'react'
 
-const Channel = () => <div>Channel</div>
+const Channel = props => <div>{props.children}</div>
 
 export default Channel

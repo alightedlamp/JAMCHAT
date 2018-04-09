@@ -8,6 +8,10 @@ import Jam from './models/jam'
 // import Arrangement from './models/arrangement'
 // import Sequence from './models/sequence'
 
+/* ////////////////////////////////////////
+//      GET HTML Routes
+//////////////////////////////////////// */
+
 export const homePage = () => null
 export const aboutPage = () => null
 export const lobbyPage = () => null
@@ -15,6 +19,20 @@ export const loginPage = () => null
 export const registerPage = () => null
 export const jamPage = () => null
 export const userProfilePage = () => null
+
+/* ////////////////////////////////////////
+//      GET API Routes
+//////////////////////////////////////// */
+
+export const listRooms = (req, res, next) =>
+  Jam.find({}).then((docs) => {
+    res.locals.docs = docs
+    next()
+  })
+
+/* ////////////////////////////////////////
+//      POST API Routes
+//////////////////////////////////////// */
 
 export const userRegister = (req: Object, res: Object, next: Function) => {
   User.register(new User({ username: req.body.username }), req.body.password)
