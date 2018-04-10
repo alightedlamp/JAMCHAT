@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const Room = styled.div`
@@ -30,7 +31,7 @@ const ActiveUsersHeading = styled.h4`
   font-weight: bold;
 `
 
-const Channel = props => (
+const ChannelListItem = props => (
   <Room>
     <RoomTitle>
       <strong>{props.title}</strong> started by {props.createdBy}
@@ -44,4 +45,12 @@ const Channel = props => (
   </Room>
 )
 
-export default Channel
+ChannelListItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  createdBy: PropTypes.string.isRequired,
+  createdAt: PropTypes.instanceOf(Date).isRequired,
+  users: PropTypes.arrayOf(PropTypes.Object).isRequired,
+  roomId: PropTypes.number.isRequired,
+}
+
+export default ChannelListItem

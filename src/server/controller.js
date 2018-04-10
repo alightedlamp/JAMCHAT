@@ -30,6 +30,13 @@ export const listRooms = (req, res, next) =>
     next()
   })
 
+export const getMessages = (req, res, next) => {
+  Message.find({ room: req.body.room_id }).then((docs) => {
+    res.locals.docs = docs
+    next()
+  })
+}
+
 /* ////////////////////////////////////////
 //      POST API Routes
 //////////////////////////////////////// */
@@ -102,9 +109,12 @@ export const handleRoomAction = (req: Object, res: Object, next: Function) => {
   }
 }
 
-export const postMessage = (req: Object) =>
+export const postMessage = (req: Object, res: Object, next: Function) =>
   Message.create({
     user: req.user.username,
     content: req.body.message,
     room: req.body.room,
+  }).then((doc) => {
+    res.locals.doc = doc
+    next()
   })

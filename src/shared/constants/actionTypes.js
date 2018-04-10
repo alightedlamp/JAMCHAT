@@ -66,6 +66,10 @@ export const POST_MESSAGE_FAIL = 'POST_MESSAGE_FAIL'
 
 export const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE'
 
+export const GET_MESSAGES_REQUEST = 'GET_MESSAGES_REQUEST'
+export const GET_MESSAGES_SUCCESS = 'GET_MESSAGES_SUCCESS'
+export const GET_MESSAGES_FAIL = 'GET_MESSAGES_FAIL'
+
 /* ////////////////////////////////////////
 //      Instrument Action Types
 //////////////////////////////////////// */

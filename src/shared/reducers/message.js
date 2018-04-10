@@ -10,7 +10,7 @@ import {
   RECEIVE_MESSAGE,
 } from '../constants/actionTypes'
 
-const initialState = Immutable.fromJS({ posting: false })
+const initialState = Immutable.fromJS({ posting: false, messages: [] })
 
 const messageReducer = (
   state: Immut = initialState,
@@ -20,7 +20,7 @@ const messageReducer = (
     case POST_MESSAGE_REQUEST:
       return { ...state, posting: true }
     case POST_MESSAGE_SUCCESS:
-      return { ...state, ...action.payload }
+      return { ...state, posting: false, ...action.payload }
     case POST_MESSAGE_FAIL:
       return { ...state, posting: false, error: { ...action.payload } }
     case RECEIVE_MESSAGE:

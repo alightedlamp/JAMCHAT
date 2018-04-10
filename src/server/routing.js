@@ -41,6 +41,10 @@ export default (app: Object) => {
     res.json(res.locals.docs)
   })
 
+  app.get(routes.GET_MESSAGES_ROUTE, controller.getMessages, (req, res) => {
+    res.json(res.locals.docs)
+  })
+
   /* ////////////////////////////////////////
   //      POST API Routes
   //////////////////////////////////////// */
