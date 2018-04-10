@@ -5,7 +5,7 @@ const messageSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
-  jamroom: {
+  room: {
     type: Schema.Types.ObjectId,
     ref: 'Jam',
   },

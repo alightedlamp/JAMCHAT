@@ -13,6 +13,7 @@ export const USER_LOGIN_ROUTE = '/login'
 export const USER_LOGOUT_ROUTE = '/logout'
 export const LIST_ROOMS_ROUTE = '/list_rooms'
 export const CREATE_ROOM_ROUTE = '/create_room'
+export const POST_MESSAGE_ROUTE = '/post_message'
 
 // Isomorphic routes
 export const jamPageRoute = (id?: string) => `/jam/${id || ':id'}`

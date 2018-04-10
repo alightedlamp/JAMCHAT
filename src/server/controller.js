@@ -4,7 +4,7 @@ import passport from 'passport'
 
 import User from './models/user'
 import Jam from './models/jam'
-// import Message from './models/message'
+import Message from './models/message'
 // import Arrangement from './models/arrangement'
 // import Sequence from './models/sequence'
 
@@ -51,7 +51,7 @@ export const userLogout = (req: Object, res: Object) => {
 export const createRoom = (req: Object) =>
   Jam.create({
     // eslint-disable-next-line
-    created_by: req.user._id,
+    created_by: req.user.username,
     title: req.body.title,
   })
 
@@ -101,3 +101,10 @@ export const handleRoomAction = (req: Object, res: Object, next: Function) => {
       return new Error(`Sorry, an error occurred when attempting to ${req.body.action} room.`)
   }
 }
+
+export const postMessage = (req: Object) =>
+  Message.create({
+    user: req.user.username,
+    content: req.body.message,
+    room: req.body.room,
+  })

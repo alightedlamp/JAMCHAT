@@ -59,6 +59,9 @@ export default (app: Object) => {
   app.post(routes.CREATE_ROOM_ROUTE, controller.handleRoomAction, (req, res) =>
     res.json(res.locals.doc))
 
+  app.post(routes.POST_MESSAGE_ROUTE, controller.postMessage, (req, res) =>
+    res.json(res.locals.doc))
+
   /* ////////////////////////////////////////
   //      General Error Handlers
   //////////////////////////////////////// */

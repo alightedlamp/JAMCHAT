@@ -60,7 +60,6 @@ const mapDispatchToProps = dispatch => ({
     e.preventDefault()
     dispatch(
       createRoom({
-        action: 'create',
         title: e.target.title.value,
         bpm: e.target.bpm.value,
       }),

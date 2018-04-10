@@ -2,8 +2,8 @@ import mongoose, { Schema } from 'mongoose'
 
 const jamSchema = Schema({
   created_by: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
+    type: String,
+    trim: true,
   },
   title: {
     type: String,

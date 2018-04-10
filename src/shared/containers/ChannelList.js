@@ -1,12 +1,12 @@
 // @flow
 
 import { connect } from 'react-redux'
-import { listRooms } from '../actions/jamroom'
+import { listRooms } from '../actions/lobby'
 
 import ChannelList from '../components/ChannelList'
 
 const mapStateToProps = state => ({
-  channels: state.channels,
+  rooms: state.lobby.rooms,
 })
 
 const mapDispatchToProps = dispatch => ({

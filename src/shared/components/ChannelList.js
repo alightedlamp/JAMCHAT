@@ -23,7 +23,14 @@ class ChannelList extends Component {
         </div>
         {this.props.rooms &&
           this.props.rooms.map(room => (
-            <Channel name={room.name} user={room.users} bpm={room.bpm} />
+            <Channel
+              title={room.title}
+              createdBy={room.created_by}
+              users={room.users}
+              bpm={room.bpm}
+              roomId={room._id}
+              createdAt={room.created_at}
+            />
           ))}
       </PanelWrapper>
     )

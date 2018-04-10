@@ -5,11 +5,7 @@ import { createAction } from 'redux-actions'
 import { push } from 'react-router-redux'
 import * as types from '../constants/actionTypes'
 
-import { LIST_ROOMS_ROUTE, CREATE_ROOM_ROUTE, jamPageRoute } from '../routes'
-
-export const listRoomsRequest = createAction(types.LIST_ROOMS_REQUEST)
-export const listRoomsSuccess = createAction(types.LIST_ROOMS_SUCCESS)
-export const listRoomsFail = createAction(types.LIST_ROOMS_FAIL)
+import { CREATE_ROOM_ROUTE, jamPageRoute } from '../routes'
 
 export const setVisibilityFilter = createAction(types.SET_VISIBILITY_FILTER)
 
@@ -26,18 +22,6 @@ export const leaveRoomSuccess = createAction(types.LEAVE_ROOM_SUCCESS)
 export const leaveRoomFail = createAction(types.LEAVE_ROOM_FAIL)
 
 export const setJamBpm = createAction(types.SET_JAM_BPM)
-
-export const listRooms = () => (dispatch: Function) => {
-  dispatch(listRoomsRequest())
-  axios
-    .get(LIST_ROOMS_ROUTE)
-    .then((res) => {
-      dispatch(listRoomsSuccess({
-        rooms: res.data,
-      }))
-    })
-    .catch(err => dispatch(listRoomsFail(err)))
-}
 
 export const joinRoom = (data: Object) => (dispatch: Function) => {
   dispatch(joinRoomRequest)
@@ -56,7 +40,7 @@ export const joinRoom = (data: Object) => (dispatch: Function) => {
 export const createRoom = (data: Object) => (dispatch: Function) => {
   dispatch(createRoomRequest)
   axios
-    .post(CREATE_ROOM_ROUTE, data)
+    .post(CREATE_ROOM_ROUTE, { ...data, action: 'create' })
     .then(res =>
       dispatch(createRoomSuccess({
         // eslint-disable-next-line

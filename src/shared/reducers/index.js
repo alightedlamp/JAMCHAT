@@ -8,7 +8,7 @@ import jamRoomReducer from './jamroom'
 
 export default combineReducers({
   user: userReducer,
-  rooms: lobbyReducer,
+  lobby: lobbyReducer,
   currentRoom: combineReducers({
     room: jamRoomReducer,
     messages: messageReducer,
