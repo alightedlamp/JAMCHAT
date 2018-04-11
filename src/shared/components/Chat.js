@@ -4,11 +4,16 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import PanelWrapper from './PanelWrapper'
+const MessageWrapper = styled.div`
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+`
 
 const Message = styled.div`
   margin: 10px 0;
-  border-top: 1px solid rgba(0, 0, 0, .2)
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
   padding-top: 5px;
 `
 
@@ -28,8 +33,7 @@ class Chat extends Component {
   }
   render() {
     return (
-      <PanelWrapper>
-        <p>This is the chat panel where messages will appear.</p>
+      <MessageWrapper>
         {this.props.messages &&
           this.props.messages.map(message => (
             <Message>
@@ -37,7 +41,7 @@ class Chat extends Component {
               <MessageContent>{message.content}</MessageContent>
             </Message>
           ))}
-      </PanelWrapper>
+      </MessageWrapper>
     )
   }
 }

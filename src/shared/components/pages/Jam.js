@@ -5,7 +5,6 @@ import Helmet from 'react-helmet'
 import styled from 'styled-components'
 
 import PageWrapper from '../PageWrapper'
-import PanelWrapper from '../PanelWrapper'
 import JamPanel from '../JamPanel'
 import ChatPanel from '../ChatPanel'
 
@@ -14,8 +13,12 @@ type Props = {
   creator: string,
 }
 
-const FlexWrapper = styled(PanelWrapper)`
+const FlexWrapper = styled.div`
+  top: 200px;
+  position: fixed;
   display: flex;
+  height: 80%;
+  width: 100%;
 `
 
 const Jam = ({ name, creator }: Props) => {
