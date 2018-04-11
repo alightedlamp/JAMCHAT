@@ -4,8 +4,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 const ChatForm = (handleClick: Function) => (
-  <form>
-    <input name="message" /> <button onClick={() => handleClick()}>Send</button>
+  <form onSubmit={handleClick}>
+    <input name="message" /> <button type="submit">Send</button>
   </form>
 )
 

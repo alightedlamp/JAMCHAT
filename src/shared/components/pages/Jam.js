@@ -2,15 +2,21 @@
 
 import React from 'react'
 import Helmet from 'react-helmet'
+import styled from 'styled-components'
 
 import PageWrapper from '../PageWrapper'
 import PanelWrapper from '../PanelWrapper'
+import JamPanel from '../JamPanel'
 import ChatPanel from '../ChatPanel'
 
 type Props = {
   name: string,
   creator: string,
 }
+
+const FlexWrapper = styled(PanelWrapper)`
+  display: flex;
+`
 
 const Jam = ({ name, creator }: Props) => {
   const title = name && creator ? `Jam ${name} by ${creator}` : 'Jam'
@@ -28,10 +34,11 @@ const Jam = ({ name, creator }: Props) => {
           { property: 'og:title', content: title },
         ]}
       />
-      <PanelWrapper>
-        <h2 className="f2 lh-title mt3">Jam{(name && `: ${name}`) || ''}</h2>
+      <h2 className="f2 lh-title mt3">Jam{(name && `: ${name}`) || ''}</h2>
+      <FlexWrapper>
+        <JamPanel />
         <ChatPanel />
-      </PanelWrapper>
+      </FlexWrapper>
     </PageWrapper>
   )
 }

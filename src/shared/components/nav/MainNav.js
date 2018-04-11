@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 import Button from '../Button'
 import LogoutButton from '../../containers/LogoutButton'
-import ModalContainer from '../../containers/ModalContainer'
+import StartJamModal from '../../containers/StartJamModal'
 
 import {
   ABOUT_PAGE_ROUTE,
@@ -63,7 +63,7 @@ const MainNav = (props: Object) => {
       if (!currentRoom) {
         return (
           <Fragment>
-            <ModalContainer openModalText="New Jam" label="New Jam">
+            <StartJamModal openModalText="New Jam" label="New Jam">
               <Field>
                 <label htmlFor="title">
                   Title: <input type="text" name="title" />
@@ -74,7 +74,7 @@ const MainNav = (props: Object) => {
                   BPM: <input type="number" name="bpm" />
                 </label>
               </Field>
-            </ModalContainer>
+            </StartJamModal>
           </Fragment>
         )
       }

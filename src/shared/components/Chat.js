@@ -27,7 +27,6 @@ class Chat extends Component {
     onMount()
   }
   render() {
-    console.log(this.props)
     return (
       <PanelWrapper>
         <p>This is the chat panel where messages will appear.</p>
@@ -52,7 +51,7 @@ Chat.defaultProps = {
   messages: [
     {
       user: 'dj',
-      message: 'Type a message to get started',
+      content: 'Type a message to get started',
     },
   ],
 }

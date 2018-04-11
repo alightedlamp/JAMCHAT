@@ -11,7 +11,6 @@ const mapDispatchToProps = dispatch => ({
     e.preventDefault()
     dispatch(postMessage({
       message: e.target.message,
-      user: 'FIX ME',
     }))
   },
 })

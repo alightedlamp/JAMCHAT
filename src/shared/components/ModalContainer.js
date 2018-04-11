@@ -1,11 +1,8 @@
 // @flow
 
 import React from 'react'
-import { connect } from 'react-redux'
 import styled from 'styled-components'
 import Modal from 'react-modal'
-
-import { createRoom } from '../actions/jamroom'
 
 const FormField = styled.div`
   margin: 1em auto;
@@ -39,7 +36,6 @@ class ModalContainer extends React.Component {
           onRequestClose={this.closeModal}
           contentLabel={this.props.label}
         >
-          {/* why are they doing this funcion ref? */}
           <h2 ref={subtitle => (this.subtitle = subtitle)}>
             {this.props.subtitle}
           </h2>{' '}
@@ -55,16 +51,4 @@ class ModalContainer extends React.Component {
 }
 /* eslint-disable flow-disable */
 
-const mapDispatchToProps = dispatch => ({
-  handleSubmit: e => {
-    e.preventDefault()
-    dispatch(
-      createRoom({
-        title: e.target.title.value,
-        bpm: e.target.bpm.value,
-      }),
-    )
-  },
-})
-
-export default connect(null, mapDispatchToProps)(ModalContainer)
+export default ModalContainer
