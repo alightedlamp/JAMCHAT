@@ -9,7 +9,7 @@ const messageSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: 'Jam',
   },
-  message: {
+  content: {
     type: String,
     trim: true,
   },

@@ -8,7 +8,7 @@ type Props = {
 }
 
 const Page = styled.section`
-  margin-top: 115px;
+  margin-top: 75px;
   width: 100%;
 `
 

@@ -17,8 +17,10 @@ const AppBar = styled.header`
   left: 0;
   background-color: orangered;
   width: 100%;
-  height: 115px;
-  padding: 20px;
+  height: 75px;
+  padding: 0 20px;
+  z-index: 2;
+  box-shadow: 1px 2px 17px 0 rgba(0, 0, 0, 0.2);
 `
 
 const Header = () => (

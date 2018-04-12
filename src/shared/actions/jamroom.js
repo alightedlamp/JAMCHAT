@@ -31,6 +31,8 @@ export const joinRoom = (data: Object) => (dispatch: Function) => {
       dispatch(joinRoomSuccess({
         // eslint-disable-next-line
           id: res.data._id,
+        title: res.data.title,
+        created_by: res.data.created_by,
         users: res.data.users,
       })))
     .then(action => dispatch(push(jamPageRoute(action.payload.id))))
@@ -41,11 +43,8 @@ export const createRoom = (data: Object) => (dispatch: Function) => {
   dispatch(createRoomRequest)
   axios
     .post(CREATE_ROOM_ROUTE, { ...data, action: 'create' })
-    .then(res =>
+    .then(() =>
       dispatch(createRoomSuccess({
-        // eslint-disable-next-line
-          id: res.data._id,
-        title: res.data.title,
         bpm: data.bpm,
       })))
     .then(action => dispatch(joinRoom({ id: action.payload.id })))

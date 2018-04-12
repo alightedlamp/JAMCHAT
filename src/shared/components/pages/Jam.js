@@ -14,10 +14,7 @@ type Props = {
 }
 
 const FlexWrapper = styled.div`
-  top: 200px;
-  position: fixed;
   display: flex;
-  height: 80%;
   width: 100%;
 `
 

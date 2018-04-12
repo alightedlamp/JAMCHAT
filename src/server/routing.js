@@ -53,10 +53,10 @@ export default (app: Object) => {
     res.json(res.locals.doc))
 
   app.post(routes.USER_REGISTER_ROUTE, controller.userRegister, (req, res) =>
-    res.json({ username: req.user.username }))
+    res.json({ id: req.user._id, username: req.user.username }))
 
   app.post(routes.USER_LOGIN_ROUTE, controller.userLogin, (req, res) =>
-    res.json({ username: req.user.username }))
+    res.json({ id: req.user._id, username: req.user.username }))
 
   app.post(routes.USER_LOGOUT_ROUTE, controller.userLogout)
 

@@ -112,7 +112,7 @@ export const handleRoomAction = (req: Object, res: Object, next: Function) => {
 export const postMessage = (req: Object, res: Object, next: Function) =>
   Message.create({
     user: req.user.username,
-    content: req.body.message,
+    content: req.body.content,
     room: req.body.room,
   }).then((doc) => {
     res.locals.doc = doc

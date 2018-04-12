@@ -4,6 +4,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+import JoinRoomButton from '../containers/JoinRoomButton'
+
 const Room = styled.div`
   margin: 20px 0;
   padding: 5px;
@@ -41,7 +43,7 @@ const ChannelListItem = props => (
       <ActiveUsersHeading>Active Users:</ActiveUsersHeading>
       {props.users && props.users.map(user => <li>{user.username}</li>)}
     </UsersList>
-    <button value={props.roomId}>Join Jam</button>
+    <JoinRoomButton name="room_id" value={props.roomId} label="Join Jam" />
   </Room>
 )
 

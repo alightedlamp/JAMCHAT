@@ -31,6 +31,7 @@ const Login = () => (
             Password: <input type="password" name="password" />
           </label>
         </Field>
+        <button type="submit">Submit</button>
       </LoginForm>
     </ContentBlock>
     <Footer />

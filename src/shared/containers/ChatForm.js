@@ -4,15 +4,15 @@ import { connect } from 'react-redux'
 
 import { postMessage } from '../actions/message'
 
-import ChatForm from '../components/ChatForm'
+import Form from '../components/Form'
 
 const mapDispatchToProps = dispatch => ({
-  handleClick: (e) => {
+  handleSubmit: (e) => {
     e.preventDefault()
     dispatch(postMessage({
-      message: e.target.message,
+      content: e.target.content.value,
     }))
   },
 })
 
-export default connect(mapDispatchToProps)(ChatForm)
+export default connect(null, mapDispatchToProps)(Form)

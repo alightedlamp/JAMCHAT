@@ -54,7 +54,7 @@ Chat.propTypes = {
 Chat.defaultProps = {
   messages: [
     {
-      user: 'dj',
+      user: 'DJ JAMCHAT',
       content: 'Type a message to get started',
     },
   ],

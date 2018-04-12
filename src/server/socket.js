@@ -1,36 +1,68 @@
 // @flow
 
-import {
-  IO_CONNECT,
-  IO_DISCONNECT,
-  IO_CLIENT_JOIN_ROOM,
-  IO_CLIENT_HELLO,
-  IO_SERVER_HELLO,
-} from '../shared/constants/messageTypes'
+import * as types from '../shared/constants/messageTypes'
 
 /* eslint-disable no-console */
-const setUpSocket = (io: Object) => {
-  io.on(IO_CONNECT, (socket) => {
-    console.log('[socket.io] a client connected')
+// const setUpSocket = (io: Object) => {
+//   io.on(types.IO_CONNECT, (socket) => {
+//     socket.on(types.IO_CLIENT_CHOOSE_INSTRUMENT, (room, payload) => {
+//       console.log('[socket.io] client: chose an instrument')
+//       io.to(room).emit(types.IO_SERVER_CHOOSE_INSTRUMENT, payload)
+//     })
+//     socket.on(types.IO_CLIENT_EDIT_SEQUENCE, (room, payload) => {
+//       console.log('[socket.io] client: adjusted mixer')
+//       io.to(room).emit(types.IO_SERVER_ADJUST_MIXER, payload)
+//     })
+//     socket.on(types.IO_CLIENT_ADJUST_CUTOFF, (room, payload) => {
+//       console.log('[socket.io] client: adjusted cutoff')
+//       io.to(room).emit(types.IO_SERVER_ADJUST_CUTOFF, payload)
+//     })
+//     socket.on(types.IO_CLIENT_ADJUST_RESONANCE, (room, payload) => {
+//       console.log('[socket.io] client: adjusted resonance')
+//       io.to(room).emit(types.IO_SERVER_ADJUST_RESONANCE, payload)
+//     })
+//     socket.on(types.IO_CLIENT_MUTE_CHANNEL, (room, payload) => {
+//       console.log('[socket.io] client: muted channel')
+//       io.to(room).emit(types.IO_SERVER_MUTE_CHANNEL, payload)
+//     })
+//     socket.on(types.IO_CLIENT_TOGGLE_PLAYBACK, (room, payload) => {
+//       console.log('[socket.io] client: toggled playback')
+//       io.to(room).emit(types.IO_SERVER_TOGGLE_PLAYBACK, payload)
+//     })
+//   })
+// }
 
-    socket.on(IO_CLIENT_JOIN_ROOM, (room) => {
-      socket.join(room)
-      console.log(`[socket.io] a client joined room ${room}`)
+const clientSendMessage = ({ io, socket, data }) => {
+  console.log(data)
+  // console.log(`[socket.io] client: ${data.content} by ${data.user}`)
+  io.to(io.room).emit(types.IO_SERVER_MESSAGE, data)
+}
 
-      io.emit(IO_SERVER_HELLO, 'Hello everyone!')
-      io.to(room).emit(IO_SERVER_HELLO, `Hello clients of room ${room}`)
-      socket.emit(IO_SERVER_HELLO, 'Hello you!')
-    })
+const clientJoinRoom = ({ io, socket, data }) => {
+  console.log(`[socket.io] a client joined room: ${data.room}`)
+  socket.join(data.room)
+}
 
-    socket.on(IO_CLIENT_HELLO, (clientMessage) => {
-      console.log(`[socket.io] client: ${clientMessage}`)
-    })
-
-    socket.on(IO_DISCONNECT, () => {
-      console.log('[socket.io] a client disconnected')
-    })
-  })
+const clientDisconnect = ({ io, socket }) => {
+  console.log('[socket.io] a client disconnected')
+  io.to(socket.room).emit(types.IO_CLIENT_LEAVE_ROOM)
 }
 /* eslint-enable no-console */
 
-export default setUpSocket
+const addListenersToSocket = ({ io, socket }) => {
+  const { user } = socket
+  if (user) {
+    // handleReconnect({ socket, user })
+  }
+
+  socket.on(types.IO_CLIENT_JOIN_ROOM, data =>
+    clientJoinRoom({ io, socket, data }))
+  socket.on(types.IO_CLIENT_SEND_MESSAGE, data =>
+    clientSendMessage({ io, socket, data }))
+  socket.on(types.IO_DISCONNECT, () => clientDisconnect({ io, socket }))
+}
+
+const initSocket = io =>
+  io.on(types.IO_CONNECT, socket => addListenersToSocket({ io, socket }))
+
+export default initSocket

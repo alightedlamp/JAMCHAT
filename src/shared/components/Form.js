@@ -11,10 +11,7 @@ type Props = {
 const Form = ({ title, handleSubmit, children }: Props) => (
   <div className="form-container">
     {title && <h3>{title}</h3>}
-    <form onSubmit={handleSubmit}>
-      {children}
-      <button type="submit">Submit</button>
-    </form>
+    <form onSubmit={handleSubmit}>{children}</form>
   </div>
 )
 

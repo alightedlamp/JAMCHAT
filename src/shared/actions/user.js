@@ -29,6 +29,7 @@ export const registerUser = (data: Object) => (dispatch: Function) => {
     .post(USER_REGISTER_ROUTE, data)
     .then(res =>
       dispatch(registerUserSuccess({
+        id: res.data.id,
         username: res.data.username,
         authenticated: true,
       })))
@@ -42,6 +43,7 @@ export const loginUser = (data: Object) => (dispatch: Function) => {
     .post(USER_LOGIN_ROUTE, data)
     .then(res =>
       dispatch(loginUserSuccess({
+        id: res.data.id,
         username: res.data.username,
         authenticated: true,
       })))

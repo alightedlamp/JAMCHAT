@@ -10,13 +10,13 @@ import './db'
 import routing from './routing'
 import { APP_NAME, STATIC_PATH, WEB_PORT } from '../shared/config'
 import { isProd } from '../shared/util'
-import setUpSocket from './socket'
+import initSocket from './socket'
 import User from './models/user'
 
 const app = express()
 const http = Server(app)
 const io = socketIO(http)
-setUpSocket(io)
+initSocket(io)
 
 passport.use(User.createStrategy())
 passport.serializeUser(User.serializeUser())
@@ -41,5 +41,7 @@ routing(app)
 http.listen(WEB_PORT, () =>
   // eslint-disable-next-line no-console
   console.log(`${APP_NAME} listening on port ${WEB_PORT} ${
-    isProd ? '(production)' : '(development).\nKeep "yarn dev:wds" running in an other terminal'
+    isProd
+      ? '(production)'
+      : '(development).\nKeep "yarn dev:wds" running in an other terminal'
   }`))
