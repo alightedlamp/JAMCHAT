@@ -41,7 +41,7 @@ export default (app: Object) => {
     res.json(res.locals.docs)
   })
 
-  app.get(routes.GET_MESSAGES_ROUTE, controller.getMessages, (req, res) => {
+  app.get(routes.getMessagesRoute(), controller.getMessages, (req, res) => {
     res.json(res.locals.docs)
   })
 
@@ -63,8 +63,10 @@ export default (app: Object) => {
   app.post(routes.CREATE_ROOM_ROUTE, controller.handleRoomAction, (req, res) =>
     res.json(res.locals.doc))
 
-  app.post(routes.POST_MESSAGE_ROUTE, controller.postMessage, (req, res) =>
-    res.json(res.locals.doc))
+  app.post(routes.POST_MESSAGE_ROUTE, controller.postMessage, (req, res) => {
+    console.log(res.locals.doc)
+    res.json(res.locals.doc)
+  })
 
   /* ////////////////////////////////////////
   //      General Error Handlers

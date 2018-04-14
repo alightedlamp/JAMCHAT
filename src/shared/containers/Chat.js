@@ -2,16 +2,18 @@
 
 import { connect } from 'react-redux'
 
-import { getMessages } from '../actions/message'
+import { getMessages, resetMessages } from '../actions/message'
 
 import Chat from '../components/Chat'
 
 const mapStateToProps = state => ({
-  messages: state.currentRoom.messages,
+  room: state.currentRoom.room.id,
+  messages: state.currentRoom.message.messages,
 })
 
 const mapDispatchToProps = dispatch => ({
-  onMount: () => dispatch(getMessages()),
+  onMount: id => dispatch(getMessages(id)),
+  onUnmount: () => dispatch(resetMessages()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chat)

@@ -16,6 +16,6 @@ export const CREATE_ROOM_ROUTE = '/create_room'
 export const POST_MESSAGE_ROUTE = '/post_message'
 export const GET_MESSAGES_ROUTE = '/get_messages'
 
-// Isomorphic routes
+export const getMessagesRoute = (id?: string) => `/get_messages/${id || ':id'}`
 export const jamPageRoute = (id?: string) => `/jam/${id || ':id'}`
 export const userProfilePageRoute = (id?: string) => `/user/${id || ':id'}`

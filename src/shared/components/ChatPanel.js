@@ -11,19 +11,29 @@ const ChatWrapper = styled.div`
   margin-top: 75px;
   bottom: 0;
   right: 0;
-  width: 20%;
+  width: 400px;
   display: flex;
   flex-direction: column;
   align-self: flex-end;
   height: 100%;
   overflow-y: scroll;
+  background: ghostwhite;
+  padding: 13px;
+  box-shadow: inset 0px 15px 2px rgba(0, 0, 0, 0.3);
+`
+
+const MessageInput = styled.input`
+  width: 100%;
+  padding: 13px;
+  border-radius: 5px;
+  border: 2px solid lightsteelblue;
 `
 
 const ChatPanel = () => (
   <ChatWrapper>
     <Chat />
     <ChatForm>
-      <input name="content" /> <button type="submit">Send</button>
+      <MessageInput name="content" />
     </ChatForm>
   </ChatWrapper>
 )

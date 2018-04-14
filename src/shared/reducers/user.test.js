@@ -34,7 +34,10 @@ describe('user reducer', () => {
   test('handles register user success', () => {
     expect(user(
       { fetching: true },
-      { type: REGISTER_USER_SUCCESS, payload: { authenticated: true } },
+      {
+        type: REGISTER_USER_SUCCESS,
+        payload: { authenticated: true, fetching: false },
+      },
     ))
   })
 

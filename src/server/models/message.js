@@ -13,7 +13,10 @@ const messageSchema = Schema({
     type: String,
     trim: true,
   },
-  created_at: Date,
+  created_at: {
+    type: Date,
+    default: Date.now(),
+  },
 })
 
 export default mongoose.model('Message', messageSchema)

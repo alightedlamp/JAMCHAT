@@ -33,14 +33,13 @@ import * as types from '../shared/constants/messageTypes'
 // }
 
 const clientSendMessage = ({ io, socket, data }) => {
-  console.log(data)
-  // console.log(`[socket.io] client: ${data.content} by ${data.user}`)
-  io.to(io.room).emit(types.IO_SERVER_MESSAGE, data)
+  console.log(`[socket.io] client: ${data.content} by ${data.user.username}`)
+  socket.broadcast.to(data.room_id).emit(types.IO_SERVER_SEND_MESSAGE, data)
 }
 
 const clientJoinRoom = ({ io, socket, data }) => {
-  console.log(`[socket.io] a client joined room: ${data.room}`)
-  socket.join(data.room)
+  console.log(`[socket.io] a client joined room: ${data.room_id}`)
+  socket.join(data.room_id)
 }
 
 const clientDisconnect = ({ io, socket }) => {

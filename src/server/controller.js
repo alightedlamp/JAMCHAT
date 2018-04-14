@@ -30,11 +30,19 @@ export const listRooms = (req, res, next) =>
     next()
   })
 
+// eslint-disable-next-line
 export const getMessages = (req, res, next) => {
-  Message.find({ room: req.body.room_id }).then((docs) => {
-    res.locals.docs = docs
-    next()
-  })
+  if (req.params.id) {
+    Message.find({ room: req.params.id }, 'content created_at')
+      .populate('user', 'username')
+      .exec()
+      .then((docs) => {
+        res.locals.docs = docs
+        next()
+      })
+  } else {
+    return res.status(500).json({ error: 'You did not provide a room ID' })
+  }
 }
 
 /* ////////////////////////////////////////
@@ -42,7 +50,14 @@ export const getMessages = (req, res, next) => {
 //////////////////////////////////////// */
 
 export const userRegister = (req: Object, res: Object, next: Function) => {
-  User.register(new User({ username: req.body.username }), req.body.password)
+  User.register(
+    new User({
+      username: req.body.username,
+      name: req.body.name,
+      email: req.body.email,
+    }),
+    req.body.password,
+  )
     .then(() => passport.authenticate('local')(req, res, next))
     .catch(err => res.status(500).json({ error: err.message }))
 }
@@ -111,10 +126,17 @@ export const handleRoomAction = (req: Object, res: Object, next: Function) => {
 
 export const postMessage = (req: Object, res: Object, next: Function) =>
   Message.create({
-    user: req.user.username,
+    user: req.user.id,
     content: req.body.content,
     room: req.body.room,
   }).then((doc) => {
-    res.locals.doc = doc
-    next()
+    // eslint-disable-next-line
+    Message.findOne({ _id: doc._id })
+      .populate('user', 'username')
+      .populate('room', '_id')
+      .exec()
+      .then((populatedDoc) => {
+        res.locals.doc = populatedDoc
+        next()
+      })
   })

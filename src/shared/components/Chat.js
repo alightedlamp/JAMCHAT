@@ -3,10 +3,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import moment from 'moment'
 
 const MessageWrapper = styled.div`
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: flex-end;
   width: 100%;
   height: 100%;
 `
@@ -17,19 +19,29 @@ const Message = styled.div`
   padding-top: 5px;
 `
 
-const MessageUser = styled.span`
+const MessageUser = styled.div`
   font-weight: bold;
   padding-right: 5px;
 `
 
-const MessageContent = styled.span`
+const MessageContent = styled.div`
+  margin-top: 5px;
   color: rgba(0, 0, 0, 0.8);
+`
+
+const MessageTime = styled.span`
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 0.9em;
 `
 
 class Chat extends Component {
   componentDidMount() {
-    const { onMount } = this.props
-    onMount()
+    const { onMount, room } = this.props
+    onMount(room)
+  }
+  componentWillUnmount() {
+    const { onUnmount } = this.props
+    onUnmount()
   }
   render() {
     return (
@@ -37,7 +49,12 @@ class Chat extends Component {
         {this.props.messages &&
           this.props.messages.map(message => (
             <Message>
-              <MessageUser>{message.user}</MessageUser>{' '}
+              <MessageUser>
+                {message.user}{' '}
+                <MessageTime>
+                  {moment(message.created_at).format('lll')}
+                </MessageTime>
+              </MessageUser>{' '}
               <MessageContent>{message.content}</MessageContent>
             </Message>
           ))}
@@ -48,6 +65,8 @@ class Chat extends Component {
 
 Chat.propTypes = {
   onMount: PropTypes.func.isRequired,
+  onUnmount: PropTypes.func.isRequired,
+  room: PropTypes.string.isRequired,
   messages: PropTypes.arrayOf(PropTypes.object),
 }
 

@@ -2,7 +2,6 @@
 
 import axios from 'axios'
 import { createAction } from 'redux-actions'
-import { push } from 'react-router-redux'
 import * as types from '../constants/actionTypes'
 
 import { LIST_ROOMS_ROUTE } from '../routes'

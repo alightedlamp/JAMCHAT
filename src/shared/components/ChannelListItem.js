@@ -2,35 +2,41 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 import styled from 'styled-components'
 
 import JoinRoomButton from '../containers/JoinRoomButton'
 
 const Room = styled.div`
-  margin: 20px 0;
-  padding: 5px;
+  padding: 17px;
+  margin: 30px 0;
   transition: 0.2s;
-
-  &:hover {
-    box-shadow: 0px 3px 10px 0px rgba(0, 0, 255, 0.2);
-  }
+  background: white;
+  box-shadow: 0px 3px 10px 0px lightgray;
 `
 
 const RoomTitle = styled.h3`
   font-size: 1.3em;
-  font-weight: bold;
-  padding-bottom: 5px;
+  font-weight: 300;
+  padding-bottom: 13px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   margin-bottom: 10px;
 `
 
 const UsersList = styled.ul`
-  margin: 10px 0;
+  margin: 17px 0;
+  display: flex;
+  flex-wrap: wrap;
+`
+
+const UsersListItem = styled.li`
+  margin-right: 5px;
 `
 
 const ActiveUsersHeading = styled.h4`
   font-size: 1.2em;
   font-weight: bold;
+  margin: 30px 0 15px 0;
 `
 
 const ChannelListItem = props => (
@@ -38,12 +44,13 @@ const ChannelListItem = props => (
     <RoomTitle>
       <strong>{props.title}</strong> started by {props.createdBy}
     </RoomTitle>
-    <p>at: {props.createdAt}</p>
+    <p>at: {moment(props.createdAt).format('LLL')}</p>
+    <ActiveUsersHeading>Active Users:</ActiveUsersHeading>
     <UsersList>
-      <ActiveUsersHeading>Active Users:</ActiveUsersHeading>
-      {props.users && props.users.map(user => <li>{user.username}</li>)}
+      {props.users &&
+        props.users.map(user => <UsersListItem>{user.username}</UsersListItem>)}
     </UsersList>
-    <JoinRoomButton name="room_id" value={props.roomId} label="Join Jam" />
+    <JoinRoomButton name="room" value={props.roomId} label="Join Jam" />
   </Room>
 )
 
