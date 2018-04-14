@@ -17,7 +17,10 @@ import {
 
 const initialState = Immutable.fromJS({ authenticated: false })
 
-const userReducer = (state: Immut = initialState, action: { type: string, payload: any }) => {
+const userReducer = (
+  state: Immut = initialState,
+  action: { type: string, payload: any },
+) => {
   switch (action.type) {
     case REGISTER_USER_REQUEST:
       return { ...state, fetching: true }
@@ -27,6 +30,7 @@ const userReducer = (state: Immut = initialState, action: { type: string, payloa
         fetching: false,
         authenticated: true,
         username: action.payload.username,
+        id: action.payload.id,
       }
     case REGISTER_USER_FAIL:
       return { ...state, error: { ...action.payload } }
@@ -35,9 +39,10 @@ const userReducer = (state: Immut = initialState, action: { type: string, payloa
     case LOGIN_USER_SUCCESS:
       return {
         ...state,
-        featching: false,
+        fetching: false,
         authenticated: true,
         username: action.payload.username,
+        id: action.payload.id,
       }
     case LOGIN_USER_FAIL:
       return { ...state, error: { ...action.payload } }

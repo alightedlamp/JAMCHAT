@@ -9,11 +9,14 @@ const messageSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: 'Jam',
   },
-  message: {
+  content: {
     type: String,
     trim: true,
   },
-  created_at: Date,
+  created_at: {
+    type: Date,
+    default: Date.now(),
+  },
 })
 
 export default mongoose.model('Message', messageSchema)

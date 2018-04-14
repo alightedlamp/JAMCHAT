@@ -41,6 +41,10 @@ export default (app: Object) => {
     res.json(res.locals.docs)
   })
 
+  app.get(routes.getMessagesRoute(), controller.getMessages, (req, res) => {
+    res.json(res.locals.docs)
+  })
+
   /* ////////////////////////////////////////
   //      POST API Routes
   //////////////////////////////////////// */
@@ -49,18 +53,20 @@ export default (app: Object) => {
     res.json(res.locals.doc))
 
   app.post(routes.USER_REGISTER_ROUTE, controller.userRegister, (req, res) =>
-    res.json({ username: req.user.username }))
+    res.json({ id: req.user._id, username: req.user.username }))
 
   app.post(routes.USER_LOGIN_ROUTE, controller.userLogin, (req, res) =>
-    res.json({ username: req.user.username }))
+    res.json({ id: req.user._id, username: req.user.username }))
 
   app.post(routes.USER_LOGOUT_ROUTE, controller.userLogout)
 
   app.post(routes.CREATE_ROOM_ROUTE, controller.handleRoomAction, (req, res) =>
     res.json(res.locals.doc))
 
-  app.post(routes.POST_MESSAGE_ROUTE, controller.postMessage, (req, res) =>
-    res.json(res.locals.doc))
+  app.post(routes.POST_MESSAGE_ROUTE, controller.postMessage, (req, res) => {
+    console.log(res.locals.doc)
+    res.json(res.locals.doc)
+  })
 
   /* ////////////////////////////////////////
   //      General Error Handlers

@@ -15,10 +15,12 @@ const AppBar = styled.header`
   grid-template-columns: 250px auto;
   top: 0;
   left: 0;
-  background-color: tomato;
+  background-color: orangered;
   width: 100%;
-  height: 115px;
-  padding: 20px;
+  height: 75px;
+  padding: 0 20px;
+  z-index: 2;
+  box-shadow: 1px 2px 17px 0 rgba(0, 0, 0, 0.2);
 `
 
 const Header = () => (

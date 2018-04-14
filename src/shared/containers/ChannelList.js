@@ -1,6 +1,7 @@
 // @flow
 
 import { connect } from 'react-redux'
+
 import { listRooms } from '../actions/lobby'
 
 import ChannelList from '../components/ChannelList'

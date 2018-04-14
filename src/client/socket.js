@@ -2,33 +2,19 @@
 
 import socketIOClient from 'socket.io-client'
 
-import {
-  IO_CONNECT,
-  IO_DISCONNECT,
-  IO_CLIENT_HELLO,
-  IO_CLIENT_JOIN_ROOM,
-  IO_SERVER_HELLO,
-} from '../shared/constants/messageTypes'
+import * as types from '../shared/constants/messageTypes'
 
 const socket = socketIOClient(window.location.host)
 
-/* eslint-disable no-console */
-// eslint-disable-next-line no-unused-vars
-const setUpSocket = (store: Object) => {
-  socket.on(IO_CONNECT, () => {
-    console.log('[socket.io] Connected.')
-    socket.emit(IO_CLIENT_JOIN_ROOM, 'hello-1234')
-    socket.emit(IO_CLIENT_HELLO, 'Hello!')
-  })
-
-  socket.on(IO_SERVER_HELLO, (serverMessage) => {
-    console.log(`[socket.io] Server: ${serverMessage}`)
-  })
-
-  socket.on(IO_DISCONNECT, () => {
-    console.log('[socket.io] Disconnected.')
+export const initSocket = (store) => {
+  Object.keys(types).forEach((type) => {
+    console.log('setting up socket listeners')
+    console.log(type)
+    socket.on(type, (payload) => {
+      console.log(`[socket] ${type} received`)
+      store.dispatch({ type, payload })
+    })
   })
 }
-/* eslint-enable no-console */
 
-export default setUpSocket
+export const emit = (type, payload) => socket.emit(type, payload)

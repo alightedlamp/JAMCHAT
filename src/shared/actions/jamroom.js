@@ -5,6 +5,7 @@ import { createAction } from 'redux-actions'
 import { push } from 'react-router-redux'
 import * as types from '../constants/actionTypes'
 
+import { IO_CLIENT_JOIN_ROOM } from '../constants/messageTypes'
 import { CREATE_ROOM_ROUTE, jamPageRoute } from '../routes'
 
 export const setVisibilityFilter = createAction(types.SET_VISIBILITY_FILTER)
@@ -23,7 +24,11 @@ export const leaveRoomFail = createAction(types.LEAVE_ROOM_FAIL)
 
 export const setJamBpm = createAction(types.SET_JAM_BPM)
 
-export const joinRoom = (data: Object) => (dispatch: Function) => {
+export const joinRoom = (data: Object) => (
+  dispatch: Function,
+  getState,
+  { emit },
+) => {
   dispatch(joinRoomRequest)
   axios
     .post(jamPageRoute(data.id), { action: 'join' })
@@ -31,9 +36,14 @@ export const joinRoom = (data: Object) => (dispatch: Function) => {
       dispatch(joinRoomSuccess({
         // eslint-disable-next-line
           id: res.data._id,
+        title: res.data.title,
+        created_by: res.data.created_by,
         users: res.data.users,
       })))
-    .then(action => dispatch(push(jamPageRoute(action.payload.id))))
+    .then((action) => {
+      emit(IO_CLIENT_JOIN_ROOM, { room_id: action.payload.id })
+      dispatch(push(jamPageRoute(action.payload.id)))
+    })
     .catch(err => dispatch(joinRoomFail(err)))
 }
 
@@ -41,11 +51,8 @@ export const createRoom = (data: Object) => (dispatch: Function) => {
   dispatch(createRoomRequest)
   axios
     .post(CREATE_ROOM_ROUTE, { ...data, action: 'create' })
-    .then(res =>
+    .then(() =>
       dispatch(createRoomSuccess({
-        // eslint-disable-next-line
-          id: res.data._id,
-        title: res.data.title,
         bpm: data.bpm,
       })))
     .then(action => dispatch(joinRoom({ id: action.payload.id })))

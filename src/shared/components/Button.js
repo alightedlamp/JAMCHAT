@@ -5,6 +5,8 @@ import styled from 'styled-components'
 
 type Props = {
   label: string,
+  name?: string,
+  value?: string,
   handleClick?: Function,
 }
 
@@ -24,12 +26,18 @@ const MenuButton = styled.button`
   }
 `
 
-const Button = ({ label, handleClick }: Props) => (
-  <MenuButton onClick={handleClick}>{label}</MenuButton>
+const Button = ({
+  label, name, value, handleClick,
+}: Props) => (
+  <MenuButton onClick={handleClick} name={name} value={value}>
+    {label}
+  </MenuButton>
 )
 
 Button.defaultProps = {
   handleClick: () => {},
+  name: '',
+  value: '',
 }
 
 export default Button

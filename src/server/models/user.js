@@ -5,6 +5,7 @@ const userSchema = Schema({
   username: {
     type: String,
     trim: true,
+    unique: true,
   },
   name: {
     type: String,
@@ -12,6 +13,7 @@ const userSchema = Schema({
   },
   email: {
     type: String,
+    unique: true,
     match: [/.+@.+\..+/, 'Please enter a valid e-mail address'],
   },
   avatar_url: {

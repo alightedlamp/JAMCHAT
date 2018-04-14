@@ -8,8 +8,12 @@ type Props = {
 }
 
 const Page = styled.section`
-  margin-top: 115px;
+  top: 75px;
+  position: fixed;
+  height: calc(100% - 75px);
   width: 100%;
+  overflow-y: scroll;
+  background: whitesmoke;
 `
 
 const PageWrapper = ({ children }: Props) => <Page>{children}</Page>

@@ -21,22 +21,31 @@ const Register = () => (
     <ContentBlock>
       <h2 className="f2 lh-title mt3">Register</h2>
       <p className="mv3 lh-copy">
-        Don&rsquo;t be such a lurker &mdash; sign up and start a jam! Share your jam link with your
-        friends to collaborate.
+        Don&rsquo;t be such a lurker &mdash; sign up and start a jam! Share your
+        jam link with your friends to collaborate.
       </p>
       <RegisterForm>
         <Field>
-          <label htmlFor="name">Name: <input type="text" name="name" /></label>
+          <label htmlFor="name">
+            Name: <input type="text" name="name" />
+          </label>
         </Field>
         <Field>
-          <label htmlFor="email">E-mail: <input type="text" name="email" /></label>
+          <label htmlFor="email">
+            E-mail: <input type="text" name="email" />
+          </label>
         </Field>
         <Field>
-          <label htmlFor="username">Username: <input type="text" name="username" /></label>
+          <label htmlFor="username">
+            Username: <input type="text" name="username" />
+          </label>
         </Field>
         <Field>
-          <label htmlFor="password">Password: <input type="password" name="password" /></label>
+          <label htmlFor="password">
+            Password: <input type="password" name="password" />
+          </label>
         </Field>
+        <button type="submit">Submit</button>
       </RegisterForm>
     </ContentBlock>
     <Footer />

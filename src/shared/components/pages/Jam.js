@@ -4,7 +4,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 
 import PageWrapper from '../PageWrapper'
-import PanelWrapper from '../PanelWrapper'
+import JamPanel from '../JamPanel'
 import ChatPanel from '../ChatPanel'
 
 type Props = {
@@ -12,6 +12,7 @@ type Props = {
   creator: string,
 }
 
+// Make this a class, where mount and unmount load room data into state
 const Jam = ({ name, creator }: Props) => {
   const title = name && creator ? `Jam ${name} by ${creator}` : 'Jam'
   const description =
@@ -28,10 +29,10 @@ const Jam = ({ name, creator }: Props) => {
           { property: 'og:title', content: title },
         ]}
       />
-      <PanelWrapper>
-        <h2 className="f2 lh-title mt3">Jam{(name && `: ${name}`) || ''}</h2>
+      <PageWrapper>
+        <JamPanel />
         <ChatPanel />
-      </PanelWrapper>
+      </PageWrapper>
     </PageWrapper>
   )
 }

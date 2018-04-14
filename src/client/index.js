@@ -12,7 +12,7 @@ import thunkMiddleware from 'redux-thunk'
 
 import App from '../shared/App'
 import { APP_CONTAINER_SELECTOR } from '../shared/config'
-import setUpSocket from './socket'
+import { initSocket, emit } from './socket'
 
 import rootReducer from '../shared/reducers'
 
@@ -21,7 +21,10 @@ const historyMiddleware = routerMiddleware(history)
 
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(thunkMiddleware, historyMiddleware)),
+  composeWithDevTools(applyMiddleware(
+    thunkMiddleware.withExtraArgument({ emit }),
+    historyMiddleware,
+  )),
 )
 
 const rootEl = document.querySelector(APP_CONTAINER_SELECTOR)
@@ -47,4 +50,4 @@ if (module.hot) {
   })
 }
 
-setUpSocket(store)
+initSocket(store)

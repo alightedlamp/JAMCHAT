@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import PanelWrapper from './PanelWrapper'
-import Channel from './Channel'
+import ChannelListItem from './ChannelListItem'
 
 class ChannelList extends Component {
   componentDidMount() {
@@ -23,7 +23,7 @@ class ChannelList extends Component {
         </div>
         {this.props.rooms &&
           this.props.rooms.map(room => (
-            <Channel
+            <ChannelListItem
               title={room.title}
               createdBy={room.created_by}
               users={room.users}

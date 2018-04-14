@@ -11,7 +11,7 @@ export default combineReducers({
   lobby: lobbyReducer,
   currentRoom: combineReducers({
     room: jamRoomReducer,
-    messages: messageReducer,
+    message: messageReducer,
   }),
   router: routerReducer,
 })

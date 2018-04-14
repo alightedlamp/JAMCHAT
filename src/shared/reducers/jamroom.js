@@ -26,7 +26,7 @@ const jamRoomReducer = (
     case JOIN_ROOM_REQUEST:
       return { ...state, fetching: true }
     case JOIN_ROOM_SUCCESS:
-      return { ...state, users: [...action.payload.users] }
+      return { ...state, fetching: false, ...action.payload }
     case JOIN_ROOM_FAIL:
       return { ...state, error: { ...action.payload } }
     case LEAVE_ROOM_REQUEST:

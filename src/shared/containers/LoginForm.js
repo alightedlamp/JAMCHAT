@@ -3,6 +3,7 @@
 import { connect } from 'react-redux'
 
 import { loginUser } from '../actions/user'
+
 import Form from '../components/Form'
 
 const mapDispatchToProps = dispatch => ({
