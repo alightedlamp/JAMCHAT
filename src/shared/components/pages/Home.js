@@ -38,7 +38,7 @@ const StyledLink = styled(Link)`
 `
 
 const Home = () => (
-  <PageWrapper>
+  <PageWrapper scroll>
     <Helmet meta={[{ name: 'description', content: APP_DESCRIPTION }]} />
     <HeroBlockWrapper className="about" color="lightblue" homepage="true">
       <CtaHeader>Chat, Make Music, Collaborate</CtaHeader>

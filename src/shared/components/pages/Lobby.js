@@ -11,7 +11,7 @@ const LobbyView = styled.section`
   grid-template-rows: 100px auto;
 `
 
-const title = 'Lobby'
+const title = 'Sessions'
 const description = 'List of channels on JAMCHAT.CLUB'
 
 const Lobby = () => (
@@ -23,12 +23,10 @@ const Lobby = () => (
         { property: 'og:title', content: title },
       ]}
     />
-    <PanelWrapper>
-      <LobbyView>
-        <h2 className="f2 lh-title mt3">Lobby</h2>
-        <ChannelList />
-      </LobbyView>
-    </PanelWrapper>
+    <LobbyView>
+      <h2 className="f2 lh-title mt3">Sessions</h2>
+      <ChannelList />
+    </LobbyView>
   </PageWrapper>
 )
 

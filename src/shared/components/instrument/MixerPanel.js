@@ -4,28 +4,33 @@ import React from 'react'
 import styled from 'styled-components'
 
 import PanelWrapper from '../PanelWrapper'
+import Button from '../Button'
 
-const BlockPanel = PanelWrapper.extend`
-  display: block;
+const MixerButton = styled(Button)`
+  width: 100%;
 `
 
-const Volume = styled.input`
-  transform: rotate(90deg);
-  height: 200px;
+const Slider = styled.div`
+  ${''};
 `
 
 const MixerPanel = () => (
-  <BlockPanel width="20%">
+  <PanelWrapper width="20%" background="#484848" color="white">
     <div>
-      <button>Start</button>
+      <MixerButton>Start</MixerButton>
     </div>
     <div>
-      <button>Mute</button>
+      <MixerButton>Mute</MixerButton>
     </div>
-    <div>
-      <Volume type="range" />
-    </div>
-  </BlockPanel>
+    <Slider>
+      <p>Volume:</p>
+      <input type="range" />
+    </Slider>
+    <Slider>
+      <p>Octave:</p>
+      <input type="range" />
+    </Slider>
+  </PanelWrapper>
 )
 
 export default MixerPanel

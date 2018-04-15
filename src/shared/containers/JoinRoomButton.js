@@ -9,7 +9,7 @@ import Button from '../components/Button'
 const mapDispatchToProps = dispatch => ({
   handleClick: (e) => {
     e.preventDefault()
-    dispatch(joinRoom({ id: e.target.value }))
+    dispatch(joinRoom({ room_id: e.target.value }))
   },
 })
 

@@ -14,7 +14,7 @@ const StyledPanel = PanelWrapper.extend`
 `
 
 const SequencerPanel = () => (
-  <StyledPanel width="80%">
+  <StyledPanel width="80%" background="#484848">
     {range(16).map(step => (
       <div>
         {cMajor.map(note => <Step key={step} step={step} note={note} />)}

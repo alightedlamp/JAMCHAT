@@ -1,11 +1,16 @@
 // @flow
 
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import InfoBar from './InfoBar'
 import Chat from '../containers/Chat'
 import ChatForm from '../containers/ChatForm'
+
+const ChatInfoBar = InfoBar.extend`
+  border-right: 1px solid #333;
+`
 
 const ChatWrapper = styled.div`
   position: fixed;
@@ -22,7 +27,7 @@ const ChatWrapper = styled.div`
 `
 
 const MessageInput = styled.input`
-  width: 100%;
+  width: calc(100% - 26px);
   padding: 13px;
   margin: 13px;
   border-radius: 5px;
@@ -31,15 +36,22 @@ const MessageInput = styled.input`
 
 const ChatPanel = ({ users }) => (
   <ChatWrapper>
-    <InfoBar>
-      <h4>Participants:</h4>
+    <ChatInfoBar>
       <ul>{users && users.map(user => <li>{user.username}</li>)}</ul>
-    </InfoBar>
+    </ChatInfoBar>
     <Chat />
     <ChatForm>
       <MessageInput name="content" />
     </ChatForm>
   </ChatWrapper>
 )
+
+ChatPanel.propTypes = {
+  users: PropTypes.arrayOf(PropTypes.object),
+}
+
+ChatPanel.defaultProps = {
+  users: [],
+}
 
 export default ChatPanel

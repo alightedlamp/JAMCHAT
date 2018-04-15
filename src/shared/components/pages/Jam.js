@@ -9,10 +9,13 @@ import JamPanel from '../../containers/JamPanel'
 import ChatPanel from '../ChatPanel'
 
 class Jam extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    const { onMount, user, roomId } = this.props
+    onMount(user.username, user.id, roomId)
+  }
   componentWillUnmount() {
-    const { onUnmount, username, roomId } = this.props
-    onUnmount(username, roomId)
+    const { onUnmount, user, roomId } = this.props
+    onUnmount(user.username, roomId)
   }
   render() {
     const title =
@@ -27,7 +30,7 @@ class Jam extends Component {
         : 'A collaborative jam on JAMCHAT.CLUB'
 
     return (
-      <PageWrapper>
+      <PageWrapper scroll={false}>
         <Helmet
           title={title}
           meta={[
@@ -49,8 +52,9 @@ Jam.propTypes = {
   createdBy: PropTypes.string,
   title: PropTypes.string,
   users: PropTypes.arrayOf(PropTypes.object),
-  username: PropTypes.string,
+  user: PropTypes.objectOf(PropTypes.string),
   roomId: PropTypes.string,
+  onMount: PropTypes.func.isRequired,
   onUnmount: PropTypes.func.isRequired,
 }
 
@@ -59,7 +63,7 @@ Jam.defaultProps = {
   createdBy: '',
   title: '',
   users: '',
-  username: '',
+  user: '',
   roomId: '',
 }
 

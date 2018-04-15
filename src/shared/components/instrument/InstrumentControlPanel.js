@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import PanelWrapper from '../PanelWrapper'
 
 const InstrumentControlPanel = () => (
-  <PanelWrapper>
+  <PanelWrapper background="#484848" color="white">
     <div>
       Cutoff: <input type="range" />
     </div>

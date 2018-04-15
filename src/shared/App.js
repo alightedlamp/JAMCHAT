@@ -47,7 +47,7 @@ const App = () => (
         <Route path={LOBBY_PAGE_ROUTE} render={() => <Lobby />} />
         <Route path={LOGIN_PAGE_ROUTE} render={() => <Login />} />
         <Route path={REGISTER_PAGE_ROUTE} render={() => <Register />} />
-        <Route path={JAM_PAGE_ROUTE} render={() => <Jam />} />
+        <Route path={JAM_PAGE_ROUTE} render={props => <Jam {...props} />} />
         <Route component={NotFound} />
       </Switch>
     </AppContainer>

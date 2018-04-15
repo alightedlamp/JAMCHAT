@@ -9,7 +9,7 @@ import MixerPanel from './MixerPanel'
 import InstrumentControlPanel from './InstrumentControlPanel'
 
 const InstrumentPanel = () => (
-  <PanelWrapper>
+  <PanelWrapper background="#484848" padding="20">
     <SequencerPanel />
     <MixerPanel />
     <InstrumentControlPanel />

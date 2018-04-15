@@ -1,14 +1,15 @@
 // @flow
 
 import React from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import styled from 'styled-components'
 
-import JoinRoomButton from '../containers/JoinRoomButton'
+import Button from './Button'
 
 const Room = styled.div`
-  padding: 17px;
+  padding: 27px;
   margin: 30px 0;
   transition: 0.2s;
   background: white;
@@ -19,9 +20,7 @@ const Room = styled.div`
 const RoomTitle = styled.h3`
   font-size: 1.3em;
   font-weight: 300;
-  padding-bottom: 13px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-  margin-bottom: 10px;
+  margin-bottom: 23px;
 `
 
 const UsersList = styled.ul`
@@ -40,20 +39,48 @@ const ActiveUsersHeading = styled.h4`
   margin: 30px 0 15px 0;
 `
 
-const ChannelListItem = props => (
-  <Room>
-    <RoomTitle>
-      <strong>{props.title}</strong> started by {props.createdBy}
-    </RoomTitle>
-    <p>at: {moment(props.createdAt).format('LLL')}</p>
-    <ActiveUsersHeading>Active Users:</ActiveUsersHeading>
-    <UsersList>
-      {props.users &&
-        props.users.map(user => <UsersListItem>{user.username}</UsersListItem>)}
-    </UsersList>
-    <JoinRoomButton name="room" value={props.roomId} label="Join Jam" />
-  </Room>
-)
+const PlayButton = styled.button`
+  border-radius: 50%;
+  height: 37px;
+  width: 37px;
+`
+
+const ChannelListItem = ({
+  title, createdAt, createdBy, roomId, users,
+}) => {
+  const userListSection = () => {
+    if (users) {
+      const userItems = users.map(user => (
+        <UsersListItem>{user.username}</UsersListItem>
+      ))
+
+      return (
+        <div>
+          <ActiveUsersHeading>Active Users:</ActiveUsersHeading>
+          <UsersList>{userItems}</UsersList>
+        </div>
+      )
+    }
+  }
+
+  return (
+    <Room>
+      <RoomTitle>
+        <strong>{title}</strong>
+      </RoomTitle>
+      <p>
+        Started by {createdBy} on {moment(createdAt).format('LLL')}
+      </p>
+      {userListSection()}
+      <Button>
+        <Link to={`/jam/${roomId}`}>Join Room</Link>
+      </Button>
+      <PlayButton>
+        <i className="fas fa-play" />
+      </PlayButton>
+    </Room>
+  )
+}
 
 ChannelListItem.propTypes = {
   title: PropTypes.string.isRequired,
