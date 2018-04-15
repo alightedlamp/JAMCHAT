@@ -16,7 +16,7 @@ import Login from './components/pages/Login'
 import Register from './components/pages/Register'
 import About from './components/pages/About'
 import Lobby from './components/pages/Lobby'
-import Jam from './components/pages/Jam'
+import Jam from './containers/Jam'
 import NotFound from './components/pages/NotFound'
 
 import {

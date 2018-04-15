@@ -1,40 +1,66 @@
 // @flow
 
-import React from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 
 import PageWrapper from '../PageWrapper'
-import JamPanel from '../JamPanel'
+import JamPanel from '../../containers/JamPanel'
 import ChatPanel from '../ChatPanel'
 
-type Props = {
-  name: string,
-  creator: string,
+class Jam extends Component {
+  componentDidMount() {}
+  componentWillUnmount() {
+    const { onUnmount, username, roomId } = this.props
+    onUnmount(username, roomId)
+  }
+  render() {
+    const title =
+      this.props.title && this.props.createdBy
+        ? `Jam ${this.props.name} by ${this.props.createdBy}`
+        : 'Jam'
+    const description =
+      this.props.title && this.props.createdBy
+        ? `${this.props.title}, a collaboriative jam started by ${
+          this.props.createdBy
+        }`
+        : 'A collaborative jam on JAMCHAT.CLUB'
+
+    return (
+      <PageWrapper>
+        <Helmet
+          title={title}
+          meta={[
+            { name: 'description', content: description },
+            { property: 'og:title', content: title },
+          ]}
+        />
+        <PageWrapper>
+          <JamPanel />
+          <ChatPanel users={this.props.users} />
+        </PageWrapper>
+      </PageWrapper>
+    )
+  }
 }
 
-// Make this a class, where mount and unmount load room data into state
-const Jam = ({ name, creator }: Props) => {
-  const title = name && creator ? `Jam ${name} by ${creator}` : 'Jam'
-  const description =
-    name && creator
-      ? `${name}, a collaboriative jam started by ${creator}`
-      : 'A collaborative jam on JAMCHAT.CLUB'
+Jam.propTypes = {
+  name: PropTypes.string,
+  createdBy: PropTypes.string,
+  title: PropTypes.string,
+  users: PropTypes.arrayOf(PropTypes.object),
+  username: PropTypes.string,
+  roomId: PropTypes.string,
+  onUnmount: PropTypes.func.isRequired,
+}
 
-  return (
-    <PageWrapper>
-      <Helmet
-        title={title}
-        meta={[
-          { name: 'description', content: description },
-          { property: 'og:title', content: title },
-        ]}
-      />
-      <PageWrapper>
-        <JamPanel />
-        <ChatPanel />
-      </PageWrapper>
-    </PageWrapper>
-  )
+Jam.defaultProps = {
+  name: '',
+  createdBy: '',
+  title: '',
+  users: '',
+  username: '',
+  roomId: '',
 }
 
 export default Jam

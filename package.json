@@ -68,6 +68,7 @@
     "express-session": "^1.15.6",
     "history": "^4.7.2",
     "immutable": "^3.8.2",
+    "lodash": "^4.17.5",
     "moment": "^2.22.0",
     "mongoose": "^5.0.12",
     "passport": "^0.4.0",
@@ -89,6 +90,7 @@
     "redux-thunk": "^2.2.0",
     "socket.io": "^2.1.0",
     "socket.io-client": "^2.1.0",
-    "styled-components": "^3.2.5"
+    "styled-components": "^3.2.5",
+    "tone": "^0.12.80"
   }
 }

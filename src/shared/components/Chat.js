@@ -9,8 +9,10 @@ const MessageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  padding: 13px;
   width: 100%;
   height: 100%;
+  overflow-y: scroll;
 `
 
 const Message = styled.div`

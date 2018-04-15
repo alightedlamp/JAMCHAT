@@ -23,13 +23,13 @@ export const postMessage = (data: Object) => (
   axios
     .post(POST_MESSAGE_ROUTE, data)
     .then((res) => {
-      console.log(res)
       const message = {
         user: res.data.user,
         content: res.data.content,
         created_at: res.data.created_at,
       }
       dispatch(postMessageSuccess(message))
+      // eslint-disable-next-line
       emit(IO_CLIENT_SEND_MESSAGE, { ...message, room_id: res.data.room._id })
     })
     .catch(err => dispatch(postMessageFail(err)))

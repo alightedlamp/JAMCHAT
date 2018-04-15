@@ -2,6 +2,8 @@
 
 import * as types from '../shared/constants/messageTypes'
 
+import { leaveRoom } from './controller'
+
 /* eslint-disable no-console */
 // const setUpSocket = (io: Object) => {
 //   io.on(types.IO_CONNECT, (socket) => {
@@ -39,12 +41,14 @@ const clientSendMessage = ({ io, socket, data }) => {
 
 const clientJoinRoom = ({ io, socket, data }) => {
   console.log(`[socket.io] a client joined room: ${data.room_id}`)
-  socket.join(data.room_id)
+  socket.join(data.room_id).emit(types.IO_SERVER_JOIN_ROOM, data)
 }
 
-const clientDisconnect = ({ io, socket }) => {
-  console.log('[socket.io] a client disconnected')
-  io.to(socket.room).emit(types.IO_CLIENT_LEAVE_ROOM)
+const clientDisconnect = async ({ io, socket, data }) => {
+  console.log('[socket.io] a client disconnected:')
+  socket.broadcast
+    .to(data.room_id)
+    .emit(types.IO_SERVER_LEAVE_ROOM, { user_id: data.user_id })
 }
 /* eslint-enable no-console */
 
@@ -58,6 +62,8 @@ const addListenersToSocket = ({ io, socket }) => {
     clientJoinRoom({ io, socket, data }))
   socket.on(types.IO_CLIENT_SEND_MESSAGE, data =>
     clientSendMessage({ io, socket, data }))
+  socket.on(types.IO_CLIENT_LEAVE_ROOM, data =>
+    clientDisconnect({ io, socket, data }))
   socket.on(types.IO_DISCONNECT, () => clientDisconnect({ io, socket }))
 }
 

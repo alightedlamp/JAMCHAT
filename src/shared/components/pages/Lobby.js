@@ -15,7 +15,7 @@ const title = 'Lobby'
 const description = 'List of channels on JAMCHAT.CLUB'
 
 const Lobby = () => (
-  <PageWrapper>
+  <PageWrapper scroll>
     <Helmet
       title={title}
       meta={[

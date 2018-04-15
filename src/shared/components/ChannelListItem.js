@@ -12,6 +12,7 @@ const Room = styled.div`
   margin: 30px 0;
   transition: 0.2s;
   background: white;
+  width: 100%;
   box-shadow: 0px 3px 10px 0px lightgray;
 `
 

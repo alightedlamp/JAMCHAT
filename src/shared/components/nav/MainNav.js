@@ -41,7 +41,6 @@ const Field = styled.div`
 
 const MainNav = (props: Object) => {
   const isLoggedIn = props.user.authenticated
-  const currentRoom = props.currenRoom
 
   const loginSection = isLoggedIn ? (
     <Fragment>
@@ -60,33 +59,30 @@ const MainNav = (props: Object) => {
   )
   const roomLinksContainer = () => {
     if (isLoggedIn) {
-      if (!currentRoom) {
-        return (
-          <Fragment>
-            <StartJamModal
-              openModalText="New Jam"
-              label="New Jam"
-              submitButtonText="Jam!"
-            >
-              <Field>
-                <label htmlFor="title">
-                  <strong>Title:</strong>
-                  <br />
-                  <input type="text" name="title" />
-                </label>
-              </Field>
-              <Field>
-                <label htmlFor="bpm">
-                  <strong>BPM:</strong>
-                  <br />
-                  <input type="number" name="bpm" />
-                </label>
-              </Field>
-            </StartJamModal>
-          </Fragment>
-        )
-      }
-      return <Button label="Leave Jam" />
+      return (
+        <Fragment>
+          <StartJamModal
+            openModalText="New Jam"
+            label="New Jam"
+            submitButtonText="Jam!"
+          >
+            <Field>
+              <label htmlFor="title">
+                <strong>Title:</strong>
+                <br />
+                <input type="text" name="title" />
+              </label>
+            </Field>
+            <Field>
+              <label htmlFor="bpm">
+                <strong>BPM:</strong>
+                <br />
+                <input type="number" name="bpm" />
+              </label>
+            </Field>
+          </StartJamModal>
+        </Fragment>
+      )
     }
     return null
   }
