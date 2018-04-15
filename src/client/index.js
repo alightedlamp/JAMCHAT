@@ -9,6 +9,7 @@ import createHistory from 'history/createBrowserHistory'
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunkMiddleware from 'redux-thunk'
+import { injectGlobal } from 'styled-components'
 
 import App from '../shared/App'
 import { APP_CONTAINER_SELECTOR } from '../shared/config'
@@ -26,6 +27,33 @@ const store = createStore(
     historyMiddleware,
   )),
 )
+
+/* eslint-disable */
+injectGlobal`
+  * {
+    box-sizing: border-box;
+  }
+  html,
+  body,
+  #${APP_CONTAINER_SELECTOR} {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    font-family: sans-serif;
+  }
+  a {
+    text-decoration: none;
+  }
+  a:active,
+  a:visited,
+  a:focus {
+    color: #5a668c;
+  }
+`
+/* eslint-enable */
 
 const rootEl = document.querySelector(APP_CONTAINER_SELECTOR)
 

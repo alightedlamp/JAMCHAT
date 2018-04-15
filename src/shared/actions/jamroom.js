@@ -31,6 +31,7 @@ export const joinRoom = (data: Object) => (
         title: res.data.room.title,
         created_by: res.data.room.created_by,
         users: res.data.room.users,
+        bpm: res.data.room.bpm,
       })))
     .then((action) => {
       emit(IO_CLIENT_JOIN_ROOM, {
@@ -57,7 +58,8 @@ export const createRoom = (data: Object) => (dispatch: Function) => {
       })))
     .then((action) => {
       if (action.payload.id) {
-        dispatch(joinRoom({ room_id: action.payload.id }))
+        // The Jam page onMount dispatches joinRoom action sequences
+        dispatch(push(jamPageRoute(action.payload.id)))
       } else {
         throw new Error('Cannot join room')
       }

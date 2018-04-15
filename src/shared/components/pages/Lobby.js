@@ -4,11 +4,11 @@ import Helmet from 'react-helmet'
 import styled from 'styled-components'
 
 import PageWrapper from '../PageWrapper'
-import PanelWrapper from '../PanelWrapper'
 import ChannelList from '../../containers/ChannelList'
 
 const LobbyView = styled.section`
-  grid-template-rows: 100px auto;
+  width: 960px;
+  margin: 0 auto;
 `
 
 const title = 'Sessions'

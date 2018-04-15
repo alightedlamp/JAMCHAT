@@ -39,17 +39,25 @@ const ActiveUsersHeading = styled.h4`
   margin: 30px 0 15px 0;
 `
 
+const ButtonSection = styled.div`
+  margin: 10px 0;
+`
+
 const PlayButton = styled.button`
   border-radius: 50%;
   height: 37px;
   width: 37px;
 `
 
+const JoinButton = styled(Button)`
+  margin: 0;
+`
+
 const ChannelListItem = ({
   title, createdAt, createdBy, roomId, users,
 }) => {
   const userListSection = () => {
-    if (users) {
+    if (users.length > 0) {
       const userItems = users.map(user => (
         <UsersListItem>{user.username}</UsersListItem>
       ))
@@ -72,12 +80,14 @@ const ChannelListItem = ({
         Started by {createdBy} on {moment(createdAt).format('LLL')}
       </p>
       {userListSection()}
-      <Button>
-        <Link to={`/jam/${roomId}`}>Join Room</Link>
-      </Button>
-      <PlayButton>
-        <i className="fas fa-play" />
-      </PlayButton>
+      <ButtonSection>
+        <JoinButton>
+          <Link to={`/jam/${roomId}`}>Join Room</Link>
+        </JoinButton>
+        <PlayButton>
+          <i className="fas fa-play" />
+        </PlayButton>
+      </ButtonSection>
     </Room>
   )
 }

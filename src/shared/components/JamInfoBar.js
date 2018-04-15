@@ -13,7 +13,7 @@ const JamInfoBar = ({ room }: Object) => (
   <InfoBar background="#ff5555">
     <Heading>
       <h4>
-        {room.title} by {room.created_by}
+        <strong>{room.title}</strong> by {room.created_by}
       </h4>
     </Heading>
     <p>

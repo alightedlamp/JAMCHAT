@@ -1,13 +1,11 @@
 import { connect } from 'react-redux'
 
 import { joinRoom, leaveRoom } from '../actions/jamroom'
+import { getMessages } from '../actions/message'
 
 import Jam from '../components/pages/Jam'
 
 const mapStateToProps = (state, ownProps) => ({
-  title: state.currentRoom.room.title,
-  createdBy: state.currentRoom.room.created_by,
-  users: state.currentRoom.room.users,
   roomId: ownProps.match.params.id,
   user: {
     username: state.user.username,
@@ -16,8 +14,10 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  onMount: (username, userId, roomId) =>
-    dispatch(joinRoom({ username, userId, room_id: roomId })),
+  onMount: async (username, userId, roomId) => {
+    await dispatch(joinRoom({ username, userId, room_id: roomId }))
+    await dispatch(getMessages(roomId))
+  },
   onUnmount: (username, roomId) =>
     dispatch(leaveRoom({ username, room_id: roomId })),
 })

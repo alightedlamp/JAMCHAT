@@ -37,10 +37,6 @@ const MessageTime = styled.span`
 `
 
 class Chat extends Component {
-  componentDidMount() {
-    const { onMount, room } = this.props
-    onMount(room)
-  }
   componentWillUnmount() {
     const { onUnmount } = this.props
     onUnmount()
@@ -66,9 +62,7 @@ class Chat extends Component {
 }
 
 Chat.propTypes = {
-  onMount: PropTypes.func.isRequired,
   onUnmount: PropTypes.func.isRequired,
-  room: PropTypes.string.isRequired,
   messages: PropTypes.arrayOf(PropTypes.object),
 }
 

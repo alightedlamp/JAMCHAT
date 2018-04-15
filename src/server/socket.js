@@ -46,18 +46,19 @@ const clientJoinRoom = ({ io, socket, data }) => {
 
 const clientDisconnect = async ({ io, socket, data }) => {
   console.log('[socket.io] a client disconnected:')
-  socket.broadcast
-    .to(data.room_id)
-    .emit(types.IO_SERVER_LEAVE_ROOM, { user_id: data.user_id })
+  console.log(data)
+  // Disconnect happened on user leaving room
+  if (data) {
+    socket.leave(data.room_id)
+    socket.broadcast
+      .to(data.room_id)
+      .emit(types.IO_SERVER_LEAVE_ROOM, { user_id: data.user_id })
+  }
+  // Disconnect happened on user closing browser or refreshing
 }
 /* eslint-enable no-console */
 
 const addListenersToSocket = ({ io, socket }) => {
-  const { user } = socket
-  if (user) {
-    // handleReconnect({ socket, user })
-  }
-
   socket.on(types.IO_CLIENT_JOIN_ROOM, data =>
     clientJoinRoom({ io, socket, data }))
   socket.on(types.IO_CLIENT_SEND_MESSAGE, data =>

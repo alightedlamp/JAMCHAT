@@ -37,7 +37,7 @@ const jamRoomReducer = (
     case LEAVE_ROOM_REQUEST:
       return { ...state, fetching: true }
     case LEAVE_ROOM_SUCCESS:
-      return { ...state, ...action.payload }
+      return { fetching: false }
     case LEAVE_ROOM_FAIL:
       return { ...state, error: { ...action.payload } }
     case IO_SERVER_JOIN_ROOM:

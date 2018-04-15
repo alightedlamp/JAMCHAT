@@ -6,7 +6,7 @@ import Helmet from 'react-helmet'
 
 import PageWrapper from '../PageWrapper'
 import JamPanel from '../../containers/JamPanel'
-import ChatPanel from '../ChatPanel'
+import ChatPanel from '../../containers/ChatPanel'
 
 class Jam extends Component {
   componentDidMount() {
@@ -40,7 +40,7 @@ class Jam extends Component {
         />
         <PageWrapper>
           <JamPanel />
-          <ChatPanel users={this.props.users} />
+          <ChatPanel />
         </PageWrapper>
       </PageWrapper>
     )
@@ -51,7 +51,6 @@ Jam.propTypes = {
   name: PropTypes.string,
   createdBy: PropTypes.string,
   title: PropTypes.string,
-  users: PropTypes.arrayOf(PropTypes.object),
   user: PropTypes.objectOf(PropTypes.string),
   roomId: PropTypes.string,
   onMount: PropTypes.func.isRequired,
@@ -62,7 +61,6 @@ Jam.defaultProps = {
   name: '',
   createdBy: '',
   title: '',
-  users: '',
   user: '',
   roomId: '',
 }

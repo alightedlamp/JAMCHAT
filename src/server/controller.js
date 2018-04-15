@@ -75,6 +75,7 @@ export const createRoom = (req: Object) =>
     // eslint-disable-next-line
     created_by: req.user.username,
     title: req.body.title,
+    bpm: req.body.bpm,
   })
 
 export const joinRoom = (req: Object) =>
@@ -121,6 +122,7 @@ export const postMessage = (req: Object, res: Object, next: Function) =>
     user: req.user.id,
     content: req.body.content,
     room: req.body.room,
+    created_at: Date.now(),
   }).then((doc) => {
     // eslint-disable-next-line
     Message.findOne({ _id: doc._id })

@@ -8,13 +8,22 @@ import PanelWrapper from '../PanelWrapper'
 const InstrumentControlPanel = () => (
   <PanelWrapper background="#484848" color="white">
     <div>
-      Cutoff: <input type="range" />
+      <div>Cutoff</div>
+      <div>
+        <input type="range" />
+      </div>
     </div>
     <div>
-      Resonance: <input type="range" />
+      <div>Resonance</div>
+      <div>
+        <input type="range" />
+      </div>
     </div>
     <div>
-      Fader: <input type="range" />
+      <div>Fader</div>
+      <div>
+        <input type="range" />
+      </div>
     </div>
   </PanelWrapper>
 )

@@ -14,6 +14,10 @@ const jamSchema = Schema({
     type: Boolean,
     default: true,
   },
+  bpm: {
+    type: Number,
+    default: 120,
+  },
   users: {
     type: Array,
     maxItems: 4,

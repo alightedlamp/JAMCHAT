@@ -11,7 +11,11 @@ import App from './../shared/App'
 import { APP_CONTAINER_CLASS, STATIC_PATH, WDS_PORT } from '../shared/config'
 import { isProd } from '../shared/util'
 
-const renderApp = (location: string, plainPartialState: ?Object, routerContext: ?Object = {}) => {
+const renderApp = (
+  location: string,
+  plainPartialState: ?Object,
+  routerContext: ?Object = {},
+) => {
   const store = initStore(plainPartialState)
   const app = (
     <Provider store={store}>
@@ -36,6 +40,7 @@ const renderApp = (location: string, plainPartialState: ?Object, routerContext: 
         isProd ? STATIC_PATH : `http://localhost:${WDS_PORT}/dist`
       }/css/${file}.css" />`)
     .join('')}
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
         </head>
         <body>
           <div class="${APP_CONTAINER_CLASS}">${appHtml}</div>
