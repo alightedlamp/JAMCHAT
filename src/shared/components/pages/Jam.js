@@ -20,7 +20,7 @@ class Jam extends Component {
   render() {
     const title =
       this.props.title && this.props.createdBy
-        ? `Jam ${this.props.name} by ${this.props.createdBy}`
+        ? `Jam ${this.props.title} by ${this.props.createdBy}`
         : 'Jam'
     const description =
       this.props.title && this.props.createdBy

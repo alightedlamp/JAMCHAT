@@ -6,6 +6,10 @@ import styled from 'styled-components'
 import PanelWrapper from '../PanelWrapper'
 import Button from '../Button'
 
+const StyledMixerPanel = PanelWrapper.extend`
+  justify-content: center;
+`
+
 const MixerButton = styled(Button)`
   width: 100%;
 `
@@ -15,7 +19,7 @@ const Slider = styled.div`
 `
 
 const MixerPanel = () => (
-  <PanelWrapper width="20%" background="#484848" color="white">
+  <StyledMixerPanel width="20%" background="#484848" color="white">
     <div>
       <MixerButton>Start</MixerButton>
     </div>
@@ -30,7 +34,7 @@ const MixerPanel = () => (
       <p>Octave:</p>
       <input type="range" />
     </Slider>
-  </PanelWrapper>
+  </StyledMixerPanel>
 )
 
 export default MixerPanel

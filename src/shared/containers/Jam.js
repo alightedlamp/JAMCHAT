@@ -6,6 +6,8 @@ import { getMessages } from '../actions/message'
 import Jam from '../components/pages/Jam'
 
 const mapStateToProps = (state, ownProps) => ({
+  title: state.currentRoom.room.title,
+  createdBy: state.currentRoom.room.createdBy,
   roomId: ownProps.match.params.id,
   user: {
     username: state.user.username,
