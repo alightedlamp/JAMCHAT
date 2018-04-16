@@ -1,5 +1,5 @@
 export const STATIC_PATH = '/static'
-export const APP_NAME = 'JAMCHAT'
+export const APP_NAME = 'JAM 💬'
 export const APP_DESCRIPTION =
   'JAMCHAT.CLUB is a full stack JavaScript application which lets users create and join chat rooms in which they get to choose an instrument to play while chatting with others.'
 

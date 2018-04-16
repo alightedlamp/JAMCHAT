@@ -75,6 +75,7 @@ export const createRoom = (req: Object) =>
     // eslint-disable-next-line
     created_by: req.user.username,
     title: req.body.title,
+    bpm: req.body.bpm,
   })
 
 export const joinRoom = (req: Object) =>
@@ -91,19 +92,10 @@ export const joinRoom = (req: Object) =>
   ).exec()
 
 export const leaveRoom = (req: Object) =>
-  Jam.findOne({ _id: req.room_id }).then((doc) => {
-    const records = { data: doc }
-    const { users } = doc
-    const currentUserIdx = users.indexOf(req.user_id)
-    users.splice(currentUserIdx, 1)
-
-    return users.save((err) => {
-      if (err) {
-        return err
-      }
-      return records
-    })
-  })
+  Jam.findByIdAndUpdate(
+    { _id: req.params.id },
+    { $pull: { users: { username: req.body.username } } },
+  )
 
 export const handleRoomAction = (req: Object, res: Object, next: Function) => {
   switch (req.body.action) {
@@ -114,7 +106,8 @@ export const handleRoomAction = (req: Object, res: Object, next: Function) => {
       })
     case 'join':
       return joinRoom(req).then((doc) => {
-        res.locals.doc = doc
+        res.locals.room = doc
+        res.locals.user = req.user
         next()
       })
     case 'leave':
@@ -129,6 +122,7 @@ export const postMessage = (req: Object, res: Object, next: Function) =>
     user: req.user.id,
     content: req.body.content,
     room: req.body.room,
+    created_at: Date.now(),
   }).then((doc) => {
     // eslint-disable-next-line
     Message.findOne({ _id: doc._id })

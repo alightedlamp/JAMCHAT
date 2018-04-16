@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 import Button from '../Button'
+import Input from '../Input'
 import LogoutButton from '../../containers/LogoutButton'
 import StartJamModal from '../../containers/StartJamModal'
 
@@ -33,6 +34,8 @@ const LinkListItem = styled.li`
 
 const NavUser = styled.span`
   font-size: 1.25em;
+  margin-right: 17px;
+  color: ${props => props.theme.primaryButtonBgColor};
 `
 
 const Field = styled.div`
@@ -41,52 +44,45 @@ const Field = styled.div`
 
 const MainNav = (props: Object) => {
   const isLoggedIn = props.user.authenticated
-  const currentRoom = props.currenRoom
 
   const loginSection = isLoggedIn ? (
     <Fragment>
       <NavUser>{props.user.username}</NavUser>
-      <LogoutButton />
+      <LogoutButton>Logout</LogoutButton>
     </Fragment>
   ) : (
     <Fragment>
       <NavLink to={LOGIN_PAGE_ROUTE} exact>
-        <Button label="Login" />
+        <Button>Login</Button>
       </NavLink>
       <NavLink to={REGISTER_PAGE_ROUTE} exact>
-        <Button label="Register" />
+        <Button>Register</Button>
       </NavLink>
     </Fragment>
   )
   const roomLinksContainer = () => {
     if (isLoggedIn) {
-      if (!currentRoom) {
-        return (
-          <Fragment>
-            <StartJamModal
-              openModalText="New Jam"
-              label="New Jam"
-              submitButtonText="Jam!"
-            >
-              <Field>
-                <label htmlFor="title">
-                  <strong>Title:</strong>
-                  <br />
-                  <input type="text" name="title" />
-                </label>
-              </Field>
-              <Field>
-                <label htmlFor="bpm">
-                  <strong>BPM:</strong>
-                  <br />
-                  <input type="number" name="bpm" />
-                </label>
-              </Field>
-            </StartJamModal>
-          </Fragment>
-        )
-      }
-      return <Button label="Leave Jam" />
+      return (
+        <Fragment>
+          <StartJamModal
+            openModalText="New Jam"
+            label="New Jam"
+            submitButtonText="Jam!"
+          >
+            <h3>Start a Jam</h3>
+            <Field>
+              <label htmlFor="text">
+                <Input type="text" name="title" placeholder="Title" required />
+              </label>
+            </Field>
+            <Field>
+              <label htmlFor="bpm">
+                <Input type="number" name="bpm" placeholder="BPM" required />
+              </label>
+            </Field>
+          </StartJamModal>
+        </Fragment>
+      )
     }
     return null
   }
@@ -96,7 +92,7 @@ const MainNav = (props: Object) => {
       <LinkList>
         {[
           { route: ABOUT_PAGE_ROUTE, label: 'About' },
-          { route: LOBBY_PAGE_ROUTE, label: 'Lobby' },
+          { route: LOBBY_PAGE_ROUTE, label: 'Sessions' },
         ].map(link => (
           <LinkListItem key={link.route}>
             <NavLink to={link.route} exact>

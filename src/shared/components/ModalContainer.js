@@ -4,38 +4,25 @@ import React from 'react'
 import styled from 'styled-components'
 import Modal from 'react-modal'
 
+import MenuButton from '../components/MenuButton'
+
 const modalStyle = {
   content: {
     width: '500px',
-    height: '350px',
-    display: 'flex',
-    top: '50%',
+    minHeight: '150px',
+    top: 'initial',
     left: '50%',
-    transform: 'translate(-50%, -50%)',
+    transform: 'translate(-50%, -75%)',
     background: 'aliceblue',
     border: 0,
+    borderRadius: 0,
+    padding: '27px',
     boxShadow: '2px 3px 22px 1px rgba(0,0,13,.3)',
   },
 }
 
 const CloseButton = styled.button`
   visibility: hidden;
-`
-
-const MenuButton = styled.button`
-  padding: 7px;
-  margin: 0 10px;
-  width: 100px;
-  font-size: 1.15em;
-  border: 3px solid ${props => props.theme.primaryButtonColor};
-  background: ${props => props.theme.primaryButtonBgColor};
-  color: ${props => props.theme.primaryButtonColor};
-
-  &:hover {
-    background: blue;
-    color: lightblue;
-    transition: 0.5s;
-  }
 `
 
 const FormField = styled.div`

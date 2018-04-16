@@ -12,6 +12,11 @@ import {
   LEAVE_ROOM_FAIL,
 } from '../constants/actionTypes'
 
+import {
+  IO_SERVER_JOIN_ROOM,
+  IO_SERVER_LEAVE_ROOM,
+} from '../constants/messageTypes'
+
 const jamRoomReducer = (
   state: Object = {},
   action: { type: string, payload: Object },
@@ -32,9 +37,16 @@ const jamRoomReducer = (
     case LEAVE_ROOM_REQUEST:
       return { ...state, fetching: true }
     case LEAVE_ROOM_SUCCESS:
-      return { ...state, ...action.payload }
+      return { fetching: false }
     case LEAVE_ROOM_FAIL:
       return { ...state, error: { ...action.payload } }
+    case IO_SERVER_JOIN_ROOM:
+      return { ...state, users: [...state.users, ...action.payload] }
+    case IO_SERVER_LEAVE_ROOM:
+      return {
+        ...state,
+        users: state.users.filter(user => user.id !== action.payload.user_id),
+      }
     default:
       return state
   }

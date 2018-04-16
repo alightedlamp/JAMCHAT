@@ -39,8 +39,6 @@ const messageReducer = (
     case POST_MESSAGE_FAIL:
       return { ...state, posting: false, error: { ...action.payload } }
     case IO_SERVER_SEND_MESSAGE:
-      console.log('adding message from server:')
-      console.log(action.payload)
       return addNewMessageToState(state, action.payload)
     case GET_MESSAGES_REQUEST:
       return { ...state, fetching: true }
