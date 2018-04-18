@@ -3,6 +3,8 @@
 import path from 'path'
 import webpack from 'webpack'
 
+import HardSourceWebpackPlugin from 'hard-source-webpack-plugin'
+
 import { WDS_PORT } from './src/shared/config'
 import { isProd } from './src/shared/util'
 
@@ -53,5 +55,6 @@ export default {
     new webpack.DefinePlugin({
       'process.env.BROWSER': true,
     }),
+    new HardSourceWebpackPlugin(),
   ],
 }

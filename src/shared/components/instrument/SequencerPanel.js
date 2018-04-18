@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { range } from 'lodash'
 
 import PanelWrapper from '../PanelWrapper'
-import Step from './Step'
+import Step from '../../containers/instrument/Step'
 
 import { cMajor } from '../../constants/instrument'
 

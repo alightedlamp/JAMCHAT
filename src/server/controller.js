@@ -24,14 +24,14 @@ export const userProfilePage = () => null
 //      GET API Routes
 //////////////////////////////////////// */
 
-export const listRooms = (req, res, next) =>
+export const listRooms = (req: Object, res: Object, next: Function) =>
   Jam.find({}).then((docs) => {
     res.locals.docs = docs
     next()
   })
 
 // eslint-disable-next-line
-export const getMessages = (req, res, next) => {
+export const getMessages = (req: Object, res: Object, next: Function) => {
   if (req.params.id) {
     Message.find({ room: req.params.id }, 'content created_at')
       .populate('user', 'username')

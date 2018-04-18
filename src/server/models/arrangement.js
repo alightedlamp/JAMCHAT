@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose'
 
 const arrangementSchema = Schema({
-  jamroom_id: {
+  room_id: {
     type: Schema.Types.ObjectId,
     ref: 'Jam',
   },

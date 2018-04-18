@@ -4,14 +4,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 import PanelWrapper from '../PanelWrapper'
-import Button from '../Button'
+import StartButton from '../../containers/instrument/StartButton'
+import MuteButton from '../../containers/instrument/MuteButton'
 
 const StyledMixerPanel = PanelWrapper.extend`
   justify-content: center;
-`
-
-const MixerButton = styled(Button)`
-  width: 100%;
 `
 
 const Slider = styled.div`
@@ -21,10 +18,10 @@ const Slider = styled.div`
 const MixerPanel = () => (
   <StyledMixerPanel width="20%" background="#484848" color="white">
     <div>
-      <MixerButton>Start</MixerButton>
+      <StartButton>Start</StartButton>
     </div>
     <div>
-      <MixerButton>Mute</MixerButton>
+      <MuteButton>Mute</MuteButton>
     </div>
     <Slider>
       <p>Volume:</p>

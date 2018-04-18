@@ -3,6 +3,7 @@
 import { connect } from 'react-redux'
 
 import { postMessage } from '../actions/message'
+import { translateMessageToSequence } from '../actions/sequencer'
 
 import Form from '../components/Form'
 
@@ -14,10 +15,12 @@ const mapPropsToState = state => ({
 const mapDispatchToProps = dispatch => ({
   handleSubmit: (e) => {
     e.preventDefault()
-    dispatch(postMessage({
+    const message = {
       room: e.target.room.value,
       content: e.target.content.value,
-    }))
+    }
+    dispatch(postMessage(message))
+    dispatch(translateMessageToSequence(message.content))
     e.target.reset()
   },
 })
