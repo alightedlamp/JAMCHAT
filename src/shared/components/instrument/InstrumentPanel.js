@@ -1,11 +1,10 @@
 // @flow
 
 import React from 'react'
-import styled from 'styled-components'
 
 import PanelWrapper from '../PanelWrapper'
 import SequencerPanel from './SequencerPanel'
-import MixerPanel from './MixerPanel'
+import MixerPanel from '../../containers/instrument/MixerPanel'
 import InstrumentControlPanel from './InstrumentControlPanel'
 
 const InstrumentPanel = () => (

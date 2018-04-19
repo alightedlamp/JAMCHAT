@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 import Button from '../Button'
-import Input from '../Input'
 import LogoutButton from '../../containers/LogoutButton'
 import StartJamModal from '../../containers/StartJamModal'
 
@@ -38,10 +37,6 @@ const NavUser = styled.span`
   color: ${props => props.theme.primaryButtonBgColor};
 `
 
-const Field = styled.div`
-  margin: 20px 0;
-`
-
 const MainNav = (props: Object) => {
   const isLoggedIn = props.user.authenticated
 
@@ -60,40 +55,12 @@ const MainNav = (props: Object) => {
       </NavLink>
     </Fragment>
   )
-  const roomLinksContainer = () => {
-    if (isLoggedIn) {
-      return (
-        <Fragment>
-          <StartJamModal
-            openModalText="New Jam"
-            label="New Jam"
-            submitButtonText="Jam!"
-          >
-            <h3>Start a Jam</h3>
-            <Field>
-              <label htmlFor="text">
-                <Input type="text" name="title" placeholder="Title" required />
-              </label>
-            </Field>
-            <Field>
-              <label htmlFor="bpm">
-                <Input type="number" name="bpm" placeholder="BPM" required />
-              </label>
-            </Field>
-          </StartJamModal>
-        </Fragment>
-      )
-    }
-    return null
-  }
+  const roomLinksContainer = () => (isLoggedIn ? <StartJamModal /> : null)
 
   return (
     <NavContainer>
       <LinkList>
-        {[
-          { route: ABOUT_PAGE_ROUTE, label: 'About' },
-          { route: LOBBY_PAGE_ROUTE, label: 'Sessions' },
-        ].map(link => (
+        {[{ route: LOBBY_PAGE_ROUTE, label: 'Sessions' }].map(link => (
           <LinkListItem key={link.route}>
             <NavLink to={link.route} exact>
               {link.label}

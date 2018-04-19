@@ -5,8 +5,12 @@ import styled from 'styled-components'
 
 import PanelWrapper from '../PanelWrapper'
 
+const StyledInstrumentControlPanel = PanelWrapper.extend`
+  padding: 20px;
+`
+
 const InstrumentControlPanel = () => (
-  <PanelWrapper background="#484848" color="white">
+  <StyledInstrumentControlPanel background="#484848" color="white">
     <div>
       <div>Cutoff</div>
       <div>
@@ -25,7 +29,7 @@ const InstrumentControlPanel = () => (
         <input type="range" />
       </div>
     </div>
-  </PanelWrapper>
+  </StyledInstrumentControlPanel>
 )
 
 export default InstrumentControlPanel

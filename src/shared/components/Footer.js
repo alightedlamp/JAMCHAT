@@ -5,13 +5,15 @@ import styled from 'styled-components'
 
 const FooterWrapper = styled.footer`
   background: #999;
-  grid-row-start: 2;
-  grid-row-end: 3;
+  display: flex;
+  align-items: center;
   height: 100px;
-  background: #171717;
-  color: #9961ff;
+  background: mediumpurple;
+  color: rebeccapurple;
   padding: 20px;
 `
-const Footer = () => <FooterWrapper>Copyright 2018 - Philip Harrell</FooterWrapper>
+const Footer = () => (
+  <FooterWrapper>Copyright 2018 - Philip Harrell</FooterWrapper>
+)
 
 export default Footer

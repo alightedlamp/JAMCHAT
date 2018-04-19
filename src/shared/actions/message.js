@@ -51,5 +51,4 @@ export const getMessages = (id: string) => (dispatch: Function) => {
 }
 
 export const receiveMessage = createAction(IO_SERVER_SEND_MESSAGE)
-
 export const resetMessages = createAction(types.RESET_MESSAGES)

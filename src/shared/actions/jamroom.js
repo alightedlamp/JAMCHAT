@@ -38,7 +38,6 @@ export const joinRoom = (data: Object) => (
         room_id: action.payload.id,
         user: action.payload.user,
       })
-      dispatch(push(jamPageRoute(action.payload.id)))
     })
     .catch(err => dispatch(joinRoomFail(err)))
 }
@@ -53,7 +52,8 @@ export const createRoom = (data: Object) => (dispatch: Function) => {
     .post(CREATE_ROOM_ROUTE, { ...data, action: 'create' })
     .then(res =>
       dispatch(createRoomSuccess({
-          id: res.data._id, // eslint-disable-line
+        id: res.data._id, // eslint-disable-line
+        title: data.title,
         bpm: data.bpm,
       })))
     .then((action) => {

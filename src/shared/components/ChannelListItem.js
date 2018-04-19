@@ -44,9 +44,11 @@ const ButtonSection = styled.div`
 `
 
 const PlayButton = styled.button`
-  border-radius: 50%;
-  height: 37px;
-  width: 37px;
+  height: 29px;
+  width: 50px;
+  border: 0;
+  background: lightgray;
+  color: dimgray;
 `
 
 const JoinButton = styled(Button)`
@@ -81,11 +83,11 @@ const ChannelListItem = ({
       </p>
       {userListSection()}
       <ButtonSection>
-        <JoinButton>
-          <Link to={`/jam/${roomId}`}>Join Room</Link>
-        </JoinButton>
+        <Link to={`/jam/${roomId}`}>
+          <JoinButton>Join Room</JoinButton>
+        </Link>
         <PlayButton>
-          <i className="fas fa-play" />
+          <i className="fa fa-play" />
         </PlayButton>
       </ButtonSection>
     </Room>

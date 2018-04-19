@@ -14,9 +14,9 @@ const StyledInput = styled.input`
   }
 `
 
-const Step = ({ step, note }) => (
+const Step = ({ step, note, handleClick }) => (
   <div>
-    <StyledInput type="checkbox" value={`${step}-${note}`} />
+    <StyledInput type="checkbox" value={`${step}-${note}`} onClick={handleClick} />
   </div>
 )
 
