@@ -1,4 +1,5 @@
 // @flow
+import 'babel-polyfill'
 
 import * as types from '../shared/constants/messageTypes'
 

@@ -18,7 +18,8 @@
     "lint": "eslint src webpack.config.babel.js --ext .js,.jsx",
     "test": "yarn lint && flow && jest --coverage",
     "precommit": "yarn test",
-    "prepush": "yarn test && yarn prod:build"
+    "prepush": "yarn test && yarn prod:build",
+    "heroku-postbuild": "yarn prod:build"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -91,5 +92,9 @@
     "socket.io-client": "^2.1.0",
     "styled-components": "^3.2.5",
     "tone": "^0.12.80"
+  },
+  "engines": {
+    "node": "7.x",
+    "yarn": "0.20.3"
   }
 }

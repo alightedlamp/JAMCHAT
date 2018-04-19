@@ -9,7 +9,7 @@ import { WDS_PORT } from './src/shared/config'
 import { isProd } from './src/shared/util'
 
 export default {
-  entry: ['react-hot-loader/patch', './src/client'],
+  entry: ['babel-polyfill', 'react-hot-loader/patch', './src/client'],
   output: {
     filename: 'js/bundle.js',
     path: path.resolve(__dirname, 'dist'),
