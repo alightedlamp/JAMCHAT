@@ -3,8 +3,6 @@ import 'babel-polyfill'
 
 import * as types from '../shared/constants/messageTypes'
 
-import { leaveRoom } from './controller'
-
 /* eslint-disable no-console */
 // const setUpSocket = (io: Object) => {
 //   io.on(types.IO_CONNECT, (socket) => {
