@@ -18,7 +18,7 @@ const instrumentReducer = (
     cutoff: 50,
     resonance: 50,
     octave: 1,
-    muted: true,
+    muted: false,
     playing: false,
   },
   action: { type: string, payload: Object },

@@ -60,10 +60,7 @@ const MainNav = (props: Object) => {
   return (
     <NavContainer>
       <LinkList>
-        {[
-          { route: ABOUT_PAGE_ROUTE, label: 'About' },
-          { route: LOBBY_PAGE_ROUTE, label: 'Sessions' },
-        ].map(link => (
+        {[{ route: LOBBY_PAGE_ROUTE, label: 'Sessions' }].map(link => (
           <LinkListItem key={link.route}>
             <NavLink to={link.route} exact>
               {link.label}

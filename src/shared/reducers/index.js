@@ -10,13 +10,6 @@ import sequencerReducer from './sequencer'
 import visitorChannelsReducer from './visitorChannels'
 import modalReducer from './modal'
 
-/*
-  Do we actually need all sessions persisting in state,
-  or can we just load up sessions on page mount?
-
-  Should channels be an independent tree in state, or should
-  each instrument be a component of currentRoom.room.users?
-*/
 export default combineReducers({
   user: userReducer,
   lobby: lobbyReducer,

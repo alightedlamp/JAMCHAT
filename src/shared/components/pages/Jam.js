@@ -1,14 +1,22 @@
 // @flow
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 
 import PageWrapper from '../PageWrapper'
 import JamPanel from '../../containers/JamPanel'
 import ChatPanel from '../../containers/ChatPanel'
 
-class Jam extends Component {
+type Props = {
+  onMount: Function,
+  onUnmount: Function,
+  user: Object,
+  roomId: string,
+  title: string,
+  createdBy: string,
+}
+
+class Jam extends Component<Props> {
   componentDidMount() {
     const { onMount, user, roomId } = this.props
     onMount(user.username, user.id, roomId)
@@ -45,24 +53,6 @@ class Jam extends Component {
       </PageWrapper>
     )
   }
-}
-
-Jam.propTypes = {
-  name: PropTypes.string,
-  createdBy: PropTypes.string,
-  title: PropTypes.string,
-  user: PropTypes.objectOf(PropTypes.string),
-  roomId: PropTypes.string,
-  onMount: PropTypes.func.isRequired,
-  onUnmount: PropTypes.func.isRequired,
-}
-
-Jam.defaultProps = {
-  name: '',
-  createdBy: '',
-  title: '',
-  user: '',
-  roomId: '',
 }
 
 export default Jam
