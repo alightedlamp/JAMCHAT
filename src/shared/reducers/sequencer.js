@@ -12,7 +12,7 @@ import {
   TRANSLATE_MESSAGE_TO_SEQUENCE,
 } from '../constants/actionTypes'
 
-const initSequence = () => range(16).map(() => 'F1')
+const initSequence = () => range(16).map(() => 'F4')
 
 // mes: "hey what's going on"
 // scale: 'C', 'D', 'E', 'F', 'G', 'A', 'B'

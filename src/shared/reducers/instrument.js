@@ -17,7 +17,7 @@ const instrumentReducer = (
     volume: 85,
     cutoff: 50,
     resonance: 50,
-    octave: 1,
+    octave: 4,
     muted: false,
     playing: false,
   },

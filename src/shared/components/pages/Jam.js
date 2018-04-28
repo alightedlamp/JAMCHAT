@@ -17,7 +17,7 @@ type Props = {
 }
 
 class Jam extends Component<Props> {
-  componentDidMount() {
+  componentWillMount() {
     const { onMount, user, roomId } = this.props
     onMount(user.username, user.id, roomId)
   }
