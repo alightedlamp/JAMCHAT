@@ -8,7 +8,12 @@ import { editSequence } from '../../actions/sequencer'
 
 const mapDispatchToProps = dispatch => ({
   handleClick: (e) => {
-    dispatch(editSequence(e.target.value))
+    const newNote = e.target.value.split('-')
+
+    dispatch(editSequence({
+      idx: newNote[0],
+      note: newNote[1],
+    }))
   },
 })
 

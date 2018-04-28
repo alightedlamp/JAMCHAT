@@ -1,15 +1,20 @@
 // @flow
 
+import { range } from 'lodash'
+
 import { cMajor } from '../constants/instrument'
 
 import {
   EDIT_SEQUENCE,
   CLEAR_SEQUENCE,
+  RESET_SEQUENCE,
   SAVE_SEQUENCE_REQUEST,
   SAVE_SEQUENCE_SUCCESS,
   SAVE_SEQUENCE_FAIL,
   TRANSLATE_MESSAGE_TO_SEQUENCE,
 } from '../constants/actionTypes'
+
+const initSequence = () => range(16).map(() => 'F1')
 
 // mes: "hey what's going on"
 // scale: 'C', 'D', 'E', 'F', 'G', 'A', 'B'
@@ -18,14 +23,14 @@ const translateMessageToSequence = (msg) => {}
 
 const editSequence = (state, action) => {
   const newSequence = state.sequence.slice()
-  newSequence.splice(action.payload.idx, 0, action.payload.note)
+  newSequence.splice(action.payload.idx, 1, action.payload.note)
   return newSequence
 }
 
 const sequencerReducer = (
   state: Object = {
     saving: false,
-    sequence: [],
+    sequence: initSequence(),
   },
   action: { type: string, payload: Object },
 ) => {
@@ -34,6 +39,8 @@ const sequencerReducer = (
       return { ...state, sequence: editSequence(state, action) }
     case CLEAR_SEQUENCE:
       return { ...state, sequence: [] }
+    case RESET_SEQUENCE:
+      return { ...state, sequence: initSequence() }
     case TRANSLATE_MESSAGE_TO_SEQUENCE:
       return {
         ...state,

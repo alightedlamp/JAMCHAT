@@ -3,7 +3,7 @@
 import React from 'react'
 
 import PanelWrapper from '../PanelWrapper'
-import SequencerPanel from './SequencerPanel'
+import SequencerPanel from '../../containers/instrument/SequencerPanel'
 import MixerPanel from '../../containers/instrument/MixerPanel'
 import InstrumentControlPanel from './InstrumentControlPanel'
 
