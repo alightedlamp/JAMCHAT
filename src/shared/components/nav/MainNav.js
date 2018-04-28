@@ -9,7 +9,6 @@ import LogoutButton from '../../containers/LogoutButton'
 import StartJamModal from '../../containers/StartJamModal'
 
 import {
-  ABOUT_PAGE_ROUTE,
   LOBBY_PAGE_ROUTE,
   LOGIN_PAGE_ROUTE,
   REGISTER_PAGE_ROUTE,

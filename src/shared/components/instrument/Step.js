@@ -3,6 +3,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
+type Props = {
+  step: number,
+  note: string,
+  octave: number,
+  active: boolean,
+  handleClick: Function,
+}
+
 const StyledInput = styled.input`
   width: 30px;
   height: 35px;
@@ -14,9 +22,16 @@ const StyledInput = styled.input`
   }
 `
 
-const Step = ({ step, note, handleClick }) => (
+const Step = ({
+  step, note, octave, active, handleClick,
+}: Props) => (
   <div>
-    <StyledInput type="checkbox" value={`${step}-${note}`} onClick={handleClick} />
+    <StyledInput
+      type="checkbox"
+      value={`${step}-${note + octave}`}
+      onClick={handleClick}
+      checked={active}
+    />
   </div>
 )
 
