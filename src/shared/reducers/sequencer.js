@@ -2,8 +2,6 @@
 
 import { range } from 'lodash'
 
-import { cMajor } from '../constants/instrument'
-
 import {
   EDIT_SEQUENCE,
   CLEAR_SEQUENCE,

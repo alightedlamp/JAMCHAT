@@ -18,6 +18,8 @@ const StyledPanel = PanelWrapper.extend`
   justify-content: space-evenly;
 `
 
+// cMajor is hardcoded here for proof of concept
+// Can be swapped out for a scale attribute from state later
 const SequencerPanel = ({ sequence, octave }: Props) => (
   <StyledPanel width="80%" background="#484848">
     {range(16).map((step, i) => (
