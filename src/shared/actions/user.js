@@ -1,11 +1,9 @@
 // @flow
 
-import axios from 'axios'
 import { createAction } from 'redux-actions'
 import { push } from 'react-router-redux'
 import * as types from '../constants/actionTypes'
-
-import { USER_REGISTER_ROUTE, USER_LOGIN_ROUTE, USER_LOGOUT_ROUTE } from '../routes'
+import * as api from '../utils/api'
 
 export const registerUserRequest = createAction(types.REGISTER_USER_REQUEST)
 export const registerUserSuccess = createAction(types.REGISTER_USER_SUCCESS)
@@ -25,8 +23,8 @@ export const setUserInstrumentFail = createAction(types.SET_USER_INSTRUMENT_FAIL
 
 export const registerUser = (data: Object) => (dispatch: Function) => {
   dispatch(registerUserRequest())
-  return axios
-    .post(USER_REGISTER_ROUTE, data)
+  return api
+    .registerUser(data)
     .then(res =>
       dispatch(registerUserSuccess({
         id: res.data.id,
@@ -39,8 +37,8 @@ export const registerUser = (data: Object) => (dispatch: Function) => {
 
 export const loginUser = (data: Object) => (dispatch: Function) => {
   dispatch(loginUserRequest())
-  return axios
-    .post(USER_LOGIN_ROUTE, data)
+  return api
+    .loginUser(data)
     .then(res =>
       dispatch(loginUserSuccess({
         id: res.data.id,
@@ -53,8 +51,8 @@ export const loginUser = (data: Object) => (dispatch: Function) => {
 
 export const logoutUser = () => (dispatch: Function) => {
   dispatch(logoutUserRequest())
-  return axios
-    .post(USER_LOGOUT_ROUTE)
+  return api
+    .logoutUser()
     .then(() => dispatch(logoutUserSuccess()))
     .then(() => dispatch(push('/')))
     .catch(err => dispatch(logoutUserFail(err)))

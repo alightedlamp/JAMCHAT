@@ -1,15 +1,14 @@
 // @flow
 
-import axios from 'axios'
 import { createAction } from 'redux-actions'
 import { push } from 'react-router-redux'
 import * as types from '../constants/actionTypes'
+import * as api from '../utils/api'
 
 import {
   IO_CLIENT_JOIN_ROOM,
   IO_CLIENT_LEAVE_ROOM,
 } from '../constants/messageTypes'
-import { CREATE_ROOM_ROUTE, jamPageRoute } from '../routes'
 
 export const setVisibilityFilter = createAction(types.SET_VISIBILITY_FILTER)
 
@@ -19,12 +18,12 @@ export const joinRoomFail = createAction(types.JOIN_ROOM_FAIL)
 
 export const joinRoom = (data: Object) => (
   dispatch: Function,
-  getState,
-  { emit },
+  getState: Function,
+  { emit }: Function,
 ) => {
   dispatch(joinRoomRequest())
-  axios
-    .post(jamPageRoute(data.room_id), { action: 'join' })
+  api
+    .joinRoom(data)
     .then(res =>
       dispatch(joinRoomSuccess({
           id: res.data.room._id, // eslint-disable-line
@@ -48,11 +47,11 @@ export const createRoomFail = createAction(types.CREATE_ROOM_FAIL)
 
 export const createRoom = (data: Object) => (dispatch: Function) => {
   dispatch(createRoomRequest())
-  axios
-    .post(CREATE_ROOM_ROUTE, { ...data, action: 'create' })
+  api
+    .createRoom(data)
     .then(res =>
       dispatch(createRoomSuccess({
-        id: res.data._id, // eslint-disable-line
+          id: res.data._id, // eslint-disable-line
         title: data.title,
         bpm: data.bpm,
       })))
@@ -77,11 +76,8 @@ export const leaveRoom = (data: Object) => (
   { emit },
 ) => {
   dispatch(leaveRoomRequest())
-  axios
-    .post(jamPageRoute(data.room_id), {
-      username: data.username,
-      action: 'leave',
-    })
+  api
+    .leaveRoom(data)
     .then(() => {
       emit(IO_CLIENT_LEAVE_ROOM, {
         room_id: data.room_id,
