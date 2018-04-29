@@ -12,11 +12,6 @@ type Props = {
   bpm: string,
 }
 
-/*
-  ToneWrapper wraps ToneJS, so we send it the users' instruments
-  and sequences from this top-level element
-*/
-
 const JamPanel = ({ title, createdBy, bpm }: Props) => (
   <PanelWrapper width="calc(100% - 400px)">
     <JamInfoBar title={title} createdBy={createdBy} bpm={bpm} />

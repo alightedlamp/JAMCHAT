@@ -1,13 +1,14 @@
 import Tone from 'tone'
 
 export class Arrangement {
-  constructor(instruments, sequences) {
+  constructor(instruments, sequences, bpm) {
     this.instruments = instruments
     this.sequences = sequences
+    this.bpm = bpm
   }
 
-  startTransport = (bpm) => {
-    Tone.Transport.bpm.value = bpm
+  startTransport = () => {
+    Tone.Transport.bpm.value = this.bpm
     Tone.Transport.loop = true
     Tone.Transport.start()
   }
@@ -19,12 +20,8 @@ export class Arrangement {
 
 export class Instrument {
   constructor(settings) {
-    this.settings = settings
-    this.instrument = ''
-  }
-
-  initInstrument = () => {
-    this.instrument = new Tone.Synth({
+    // Using default settings for now - later these can be passed in by client
+    this.settings = {
       oscillator: {
         type: 'fmsquare',
         modulationType: 'sawtooth',
@@ -37,11 +34,16 @@ export class Instrument {
         sustain: 0.1,
         release: 0.1,
       },
-    }).toMaster()
+    }
+    this.instrument = ''
+  }
+
+  mountInstrument = () => {
+    this.instrument = new Tone.Synth(this.settings).toMaster()
   }
 }
 
-export class Sequence {
+export class Sequencer {
   constructor(sequence, instrument) {
     this.sequence = sequence
     this.instrument = instrument
