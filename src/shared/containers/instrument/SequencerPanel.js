@@ -2,6 +2,10 @@
 
 import { connect } from 'react-redux'
 
+import * as toneUtil from '../../utils/tone-util'
+
+import { editSequence, clearSequence } from '../../actions/sequencer'
+
 import SequencerPanel from '../../components/instrument/SequencerPanel'
 
 const mapStateToProps = state => ({
@@ -9,4 +13,12 @@ const mapStateToProps = state => ({
   sequence: state.currentRoom.userChannel.sequencer.sequence,
 })
 
-export default connect(mapStateToProps)(SequencerPanel)
+const mapDispatchToProps = dispatch => ({
+  onUpdate: (sequence) => {
+    dispatch(editSequence())
+    toneUtil.updateSequence(sequence)
+    toneUtil.playSequence()
+  },
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SequencerPanel)

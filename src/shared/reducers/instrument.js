@@ -14,6 +14,19 @@ import {
 
 const instrumentReducer = (
   state: Object = {
+    type: '',
+    oscillator: {
+      type: 'fmsquare',
+      modulationType: 'sawtooth',
+      modulationIndex: 3,
+      harmonicity: 3.4,
+    },
+    envelope: {
+      attack: 0.001,
+      decay: 0.1,
+      sustain: 0.1,
+      release: 0.1,
+    },
     volume: 85,
     cutoff: 50,
     resonance: 50,

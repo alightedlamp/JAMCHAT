@@ -1,24 +1,54 @@
 // @flow
 
-import React from 'react'
+import React, { Component } from 'react'
+import { flatten } from 'lodash'
 
 import PanelWrapper from './PanelWrapper'
 import JamInfoBar from './JamInfoBar'
-import InstrumentPanel from './instrument/InstrumentPanel'
+import InstrumentPanel from '../containers/instrument/InstrumentPanel'
 
 type Props = {
   title: string,
   createdBy: string,
   bpm: string,
+  onMount: Function,
+  userChannel: Object,
+  visitorChannels: Array<Object>,
 }
 
-const JamPanel = ({ title, createdBy, bpm }: Props) => (
-  <PanelWrapper width="calc(100% - 400px)">
-    <JamInfoBar title={title} createdBy={createdBy} bpm={bpm} />
-    <InstrumentPanel />
-    {/* <VisitorsInstrumentPanel />
-    <ArrangementPanel /> */}
-  </PanelWrapper>
-)
+class JamPanel extends Component<Props> {
+  componentDidMount() {
+    const {
+      onMount, userChannel, visitorChannels, bpm,
+    } = this.props
+    const instruments = flatten([
+      userChannel.instrument,
+      visitorChannels.map(channel => channel.instrument),
+    ])
+    const sequences = flatten([
+      userChannel.sequences,
+      visitorChannels.map(channel => channel.sequences),
+    ])
+    onMount({ instruments, sequences, bpm })
+  }
+  componentWillUnmount() {
+    const { onUnmount } = this.props
+    onUnmount()
+  }
+  render() {
+    return (
+      <PanelWrapper width="calc(100% - 400px)">
+        <JamInfoBar
+          title={this.props.title}
+          createdBy={this.props.createdBy}
+          bpm={this.props.bpm}
+        />
+        <InstrumentPanel />
+        {/* <VisitorsInstrumentPanel />
+        <ArrangementPanel /> */}
+      </PanelWrapper>
+    )
+  }
+}
 
 export default JamPanel

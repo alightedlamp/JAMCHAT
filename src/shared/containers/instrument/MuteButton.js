@@ -7,7 +7,7 @@ import Button from '../../components/Button'
 import { toggleInstrumentMute } from '../../actions/instrument'
 
 const mapStateToProps = state => ({
-  userId: state.user.id,  
+  userId: state.user.id,
 })
 
 const mapDispatchToProps = dispatch => ({
