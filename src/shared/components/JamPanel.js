@@ -18,22 +18,10 @@ type Props = {
 
 class JamPanel extends Component<Props> {
   componentDidMount() {
-    const {
-      onMount, userChannel, visitorChannels, bpm,
-    } = this.props
-    const instruments = flatten([
-      userChannel.instrument,
-      visitorChannels.map(channel => channel.instrument),
-    ])
-    const sequences = flatten([
-      userChannel.sequences,
-      visitorChannels.map(channel => channel.sequences),
-    ])
-    onMount({ instruments, sequences, bpm })
+    // Start the arrangement in it's current form
   }
   componentWillUnmount() {
-    const { onUnmount } = this.props
-    onUnmount()
+    // The user left, so destroy the arrangement
   }
   render() {
     return (

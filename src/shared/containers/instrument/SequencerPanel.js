@@ -1,11 +1,8 @@
 // @flow
 
 import { connect } from 'react-redux'
-
 import * as toneUtil from '../../utils/tone-util'
-
-import { editSequence, clearSequence } from '../../actions/sequencer'
-
+import { editSequence } from '../../actions/sequencer'
 import SequencerPanel from '../../components/instrument/SequencerPanel'
 
 const mapStateToProps = state => ({
@@ -15,7 +12,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onUpdate: (sequence) => {
-    dispatch(editSequence())
+    dispatch(editSequence(sequence))
     toneUtil.updateSequence(sequence)
     toneUtil.playSequence()
   },

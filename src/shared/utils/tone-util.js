@@ -39,16 +39,8 @@ export class Sequencer {
 }
 
 export class Arrangement {
-  constructor(instruments, sequences, bpm) {
-    this.instruments = instruments.map((instrument) => {
-      const toneInstrument = new Instrument(instrument.settings)
-      toneInstrument.mountInstrument()
-      return toneInstrument
-    })
-    this.sequences = sequences.map((sequence) => {
-      const toneSequence = new Sequencer(sequence.notes, sequence.instrument)
-      return toneSequence
-    })
+  constructor(track, bpm) {
+    this.track = track
     this.bpm = bpm
   }
 

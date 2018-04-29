@@ -1,7 +1,10 @@
 import { connect } from 'react-redux'
 
-import { startArrangement, stopArrangement } from '../actions/arrangement'
-import * as toneUtil from '../utils/tone-util'
+import {
+  compileArrangement,
+  startArrangement,
+  stopArrangement,
+} from '../actions/arrangement'
 
 import JamPanel from '../components/JamPanel'
 
@@ -15,18 +18,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onMount: ({ instruments, sequences, bpm }) => {
-    const CurrentArrangement = new toneUtil.Arrangement(
-      instruments,
-      sequences,
-      bpm,
-    )
-    dispatch(startArrangement(CurrentArrangement))
-    CurrentArrangement.startTransport()
+    dispatch(compileArrangement({ instruments, sequences, bpm }))
+    dispatch(startArrangement())
   },
-  onUnmount: (arrangement) => {
+  onUnmount: () => {
     dispatch(stopArrangement())
-    arrangement.stopTransport()
-    arrangement.resetArrangement()
   },
 })
 

@@ -16,7 +16,9 @@ type Props = {
 
 class InstrumentPanel extends Component<Props> {
   componentDidMount() {
-    const { onMount, instrument, oscillator, envelope } = this.props
+    const {
+      onMount, instrument, oscillator, envelope,
+    } = this.props
     const settings = { instrument, oscillator, envelope }
     onMount(settings)
   }
