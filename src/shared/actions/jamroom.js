@@ -5,6 +5,8 @@ import { push } from 'react-router-redux'
 import * as types from '../constants/actionTypes'
 import * as api from '../utils/api'
 
+import { jamPageRoute } from '../routes'
+
 import {
   IO_CLIENT_JOIN_ROOM,
   IO_CLIENT_LEAVE_ROOM,
@@ -72,8 +74,8 @@ export const leaveRoomFail = createAction(types.LEAVE_ROOM_FAIL)
 
 export const leaveRoom = (data: Object) => (
   dispatch: Function,
-  getState,
-  { emit },
+  getState: Function,
+  { emit }: Function,
 ) => {
   dispatch(leaveRoomRequest())
   api
