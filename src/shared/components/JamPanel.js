@@ -1,7 +1,6 @@
 // @flow
 
 import React, { Component } from 'react'
-import { flatten } from 'lodash'
 
 import PanelWrapper from './PanelWrapper'
 import JamInfoBar from './JamInfoBar'

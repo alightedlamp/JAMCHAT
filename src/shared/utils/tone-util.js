@@ -55,8 +55,7 @@ export class Arrangement {
   }
 
   resetArrangement = () => {
-    this.instruments = []
-    this.sequences = []
+    this.track = []
     this.bpm = null
   }
 }
