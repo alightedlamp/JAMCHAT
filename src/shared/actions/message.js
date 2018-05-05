@@ -1,14 +1,13 @@
 // @flow
 
-import axios from 'axios'
 import { createAction } from 'redux-actions'
 import * as types from '../constants/actionTypes'
+import * as api from '../utils/api'
 
 import {
   IO_CLIENT_SEND_MESSAGE,
   IO_SERVER_SEND_MESSAGE,
 } from '../constants/messageTypes'
-import { POST_MESSAGE_ROUTE, getMessagesRoute } from '../routes'
 
 export const postMessageRequest = createAction(types.POST_MESSAGE_REQUEST)
 export const postMessageSuccess = createAction(types.POST_MESSAGE_SUCCESS)
@@ -16,12 +15,12 @@ export const postMessageFail = createAction(types.POST_MESSAGE_FAIL)
 
 export const postMessage = (data: Object) => (
   dispatch: Function,
-  getState,
-  { emit },
+  getState: Function,
+  { emit }: Function,
 ) => {
   dispatch(postMessageRequest())
-  axios
-    .post(POST_MESSAGE_ROUTE, data)
+  api
+    .postMessage(data)
     .then((res) => {
       const message = {
         user: res.data.user,
@@ -41,8 +40,8 @@ export const getMessagesFail = createAction(types.GET_MESSAGES_FAIL)
 
 export const getMessages = (id: string) => (dispatch: Function) => {
   dispatch(getMessagesRequest)
-  axios
-    .get(getMessagesRoute(id))
+  api
+    .getMessages(id)
     .then(res =>
       dispatch(getMessagesSuccess({
         messages: res.data,

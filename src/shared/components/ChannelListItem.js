@@ -55,9 +55,21 @@ const JoinButton = styled(Button)`
   margin: 0;
 `
 
+type Props = {
+  title: string,
+  createdAt: string,
+  createdBy: string,
+  roomId: string,
+  users: Array<Object>,
+}
+
 const ChannelListItem = ({
-  title, createdAt, createdBy, roomId, users,
-}) => {
+  title,
+  createdAt,
+  createdBy,
+  roomId,
+  users,
+}: Props) => {
   const userListSection = () => {
     if (users.length > 0) {
       const userItems = users.map(user => (

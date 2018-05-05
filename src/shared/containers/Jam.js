@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 
 import { joinRoom, leaveRoom } from '../actions/jamroom'
-import { resetSequence } from '../actions/sequencer'
 import { getMessages } from '../actions/message'
 
 import Jam from '../components/pages/Jam'
@@ -23,7 +22,6 @@ const mapDispatchToProps = dispatch => ({
   },
   onUnmount: async (username, roomId) => {
     await dispatch(leaveRoom({ username, room_id: roomId }))
-    await dispatch(resetSequence())
   },
 })
 

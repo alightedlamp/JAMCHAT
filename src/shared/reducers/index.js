@@ -8,6 +8,8 @@ import jamRoomReducer from './jamroom'
 import instrumentReducer from './instrument'
 import sequencerReducer from './sequencer'
 import visitorChannelsReducer from './visitorChannels'
+import currentSequencesReducer from './currentSequences'
+import arrangementReducer from './arrangement'
 import modalReducer from './modal'
 
 export default combineReducers({
@@ -16,13 +18,16 @@ export default combineReducers({
   currentRoom: combineReducers({
     room: jamRoomReducer,
     message: messageReducer,
-    userChannel: combineReducers({
-      instrument: instrumentReducer,
-      sequencer: sequencerReducer,
+    channels: combineReducers({
+      user: combineReducers({
+        instrument: instrumentReducer,
+        sequencer: sequencerReducer,
+      }),
+      visitors: visitorChannelsReducer,
     }),
-    vistorChannels: visitorChannelsReducer,
-    // arrangement: arrangementReducer,
+    currentSequence: currentSequencesReducer,
   }),
+  arrangement: arrangementReducer,
   modal: modalReducer,
   router: routerReducer,
 })
